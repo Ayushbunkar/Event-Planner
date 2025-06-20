@@ -6,11 +6,11 @@ const Navbar = () => (
     <div className="max-w-[1600px] mx-auto flex items-center justify-between px-14">
 
       
-      <ul className="flex gap-12 text-white uppercase text-sm tracking-wide font-light">
-        <li><Link to="/">⚙️HOME</Link></li>
+      <ul className="flex gap-12 text-white uppercase text-sm tracking-wide font-bold ">
+        <li><Link to="/">HOME</Link></li>
         <li><Link to="/about">ABOUT</Link></li>
         <li><Link to="/stories">STORIES</Link></li>
-        <li><Link to="/morepages">MORE PAGES🔽</Link></li>
+        <li><Link to="/morepages">MORE PAGES</Link></li>
       </ul>
 
       <div className="flex flex-col items-center text-white">
@@ -18,12 +18,12 @@ const Navbar = () => (
   <i className="ri-empathize-line"></i>
 </span>
 
-        <span className="text-lg font-semibold">Wedding</span>
-        <span className="text-xs tracking-tight">Template</span>
+        <span className="text-2xl font-bold">Wedding</span>
+        <span className="text-xs font-bold">Template</span>
       </div>
 
       
-      <ul className="flex gap-12 text-white uppercase text-sm tracking-wide font-light">
+      <ul className="flex gap-12 text-white uppercase text-sm tracking-wide font-bold ">
         <li><Link to="/services">SERVICES</Link></li>
         <li><Link to="/gallery">GALLERY</Link></li>
         <li><Link to="/elements">ELEMENTS</Link></li>

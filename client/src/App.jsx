@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
 import Stories from "./components/Stories";
 import Morepages from "./components/Morepages";
 import Services from "./components/Services";
@@ -9,6 +8,8 @@ import Gallery from "./components/Gallery";
 import Elements from "./components/Elements";
 import Contact from "./components/Contact";
 import About from "./components/About";
+import Home from "./components/Home";
+
 
 
 const App = () => {
@@ -16,8 +17,9 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
        <main className="w-full min-h-screen">
+    
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/morepages" element={<Morepages />} />
