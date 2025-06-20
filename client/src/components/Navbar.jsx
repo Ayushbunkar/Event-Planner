@@ -14,7 +14,10 @@ const Navbar = () => (
       </ul>
 
       <div className="flex flex-col items-center text-white">
-        <span className="text-2xl">❣️</span>
+       <span className="text-4xl text-pink-500">
+  <i className="ri-empathize-line"></i>
+</span>
+
         <span className="text-lg font-semibold">Wedding</span>
         <span className="text-xs tracking-tight">Template</span>
       </div>
