@@ -50,10 +50,40 @@ const Journey = () => {
           </div>
         </div>
 
-        <div className="text-3xl md:text-5xl mr-10 pr-10 font-bold text-gray-800 ">
-          What Our <br /> Clients Are <br />
-          Saying{" "}
+      <div className="max-w-7xl mx-auto px-6  shadow-black shadow-2xl grid md:grid-cols-2 mt-50 gap-12 items-center">
+        
+        <div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+            <span className="inline-block">What Our</span> <br />
+            <span className="inline-block">Clients Are</span> <br />
+            <span className="inline-block">Saying</span>
+          </h2>
+          <p className="text-gray-600 text-base leading-relaxed mb-6">
+           Our clients consistently express how unforgettable their experiences have been. From planning to celebration, we ensure every detail is perfect, creating moments of pure joy and lasting memories
+          </p>
+          <a href="#" className="text-pink-500 font-semibold flex items-center gap-2 hover:underline">
+            Read More <span className="text-xl">→</span>
+          </a>
         </div>
+
+      
+        <div className="relative rounded overflow-hidden shadow-lg">
+          <img
+            src="https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/008/846/183/new_medium/namanverma3.jpg?1748507075"
+            alt="Couple Testimonial"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-opacity-20 mt-45 flex-col justify-center items-start p-6">
+            <p className="text-white text-lg font-bold   text-shadow-black h-100 p-10 text-center mt-30  bg-opaciity-40  shadow-2xl leading-relaxed">
+              Choose a life partner not<br />
+              because you can merely live with them, but<br />
+              because you cannot imagine<br />
+              living without them
+            </p>
+            <p className="text-pink-600 font-bold text-right w-full mt-4 italic">Juliet</p>
+          </div>
+        </div>
+      </div>
       </div>
       </div>
         </div>
