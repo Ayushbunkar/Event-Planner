@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => (
-  <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-6">
+  <nav className="absolute bg-gray-900/50 top-0 left-0 w-full z-50   py-6">
     <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-14">
 
       <ul className="flex gap-6 md:gap-12 text-white uppercase text-sm tracking-wide font-bold mb-4 md:mb-0">

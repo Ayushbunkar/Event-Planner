@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -20,9 +21,12 @@ const Hero = () => {
           feeling cherished — because your love story deserves nothing less."
         </p>
         <div className="flex gap-6">
-          <button className="bg-pink-500 px-8 py-3 text-sm rounded-full font-bold text-white hover:bg-pink-600 transition">
-            Book Now
-          </button>
+<Link to="/booknow" className="bg-pink-500 px-8 py-3 text-sm rounded-full font-bold text-white hover:bg-pink-600 transition">
+  Book Now
+</Link>
+
+         
+        
           <button className="border-white hover:border-pink-500 border-2 px-8 py-3 text-sm font-bold rounded-full hover:bg-pink-500 text-white hover:text-white transition">
             Read More
           </button>

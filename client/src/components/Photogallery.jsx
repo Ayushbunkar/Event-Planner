@@ -4,10 +4,10 @@ const Photogallery = () => {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">Vendor categories</h2>
+        <h2 className=" md:text-5xl mt-10 font-bold text-center   mb-10">Vendor categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
 
-         
+          {/* Makeup Artists */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/bridal-makeup-artists.jpg"
@@ -20,7 +20,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-        
+          {/* Wedding Planners */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-planners.jpg"
@@ -33,7 +33,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-        
+          {/* Decorators */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-decorators.jpg"
@@ -46,6 +46,7 @@ const Photogallery = () => {
             </div>
           </div>
 
+          {/* Caterers */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/catering.jpg"
@@ -58,7 +59,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-         
+          {/* Jewellery */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-jewellery.jpg"
@@ -71,7 +72,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-        
+          {/* Photographers */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-photographers.jpg"
@@ -84,7 +85,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-          
+          {/* Venues */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-venues.jpg"
@@ -97,6 +98,7 @@ const Photogallery = () => {
             </div>
           </div>
 
+          {/* Mehendi Artists */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/mehndi-artists.jpg"
@@ -109,7 +111,7 @@ const Photogallery = () => {
             </div>
           </div>
 
-        
+          {/* Invitations */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-cards.jpg"
@@ -122,6 +124,7 @@ const Photogallery = () => {
             </div>
           </div>
 
+          {/* DJs */}
           <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
             <img
               src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/dj.jpg"
@@ -137,5 +140,7 @@ const Photogallery = () => {
         </div>
       </div>
     </section>
+  );
+};
 
-  )}
+export default Photogallery;

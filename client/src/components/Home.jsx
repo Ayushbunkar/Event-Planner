@@ -1,15 +1,16 @@
 import React from "react";
 import Hero from "./hero";
+import Journey from "./Journey";
 import Photogallery from "./Photogallery";
-import Journey from "./journey";
+import WhyWeddingPlanet from "./Whyweddingplanet";
+
 const Home = () => {
   return (
     <>
-      <Hero/>
-      <Journey/>
-      <Photogallery/>
-      
-
+      <Hero />
+      <Journey />
+      <Photogallery />
+      <WhyWeddingPlanet /> 
     </>
   );
 };
