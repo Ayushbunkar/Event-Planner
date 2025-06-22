@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Booknow = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    alert("Form submitted successfully!");
+  };
+
   return (
     <div className="w-full">
       <section
         className="h-[100vh] w-full bg-no-repeat bg-center bg-cover relative flex items-center justify-center text-white"
         style={{
-          backgroundImage: `url("https://t3.ftcdn.net/jpg/14/86/03/96/240_F_1486039696_rpg3vYfYc05iv9vLVhdCBnAvqGs0Ukfe.jpg")`,
+          backgroundImage: `url("https://media.weddingz.in/images/01701d9764082531a8c9212d22697bf6/Mandap-decoration-ideas20.jpg")`,
         }}
       >
-        <div className="absolute inset-0 bg-[rgba(0,0,0,0.2)] z-10 "></div>
-        {/* Optional Overlay */}
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.0)] z-10 "></div>
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
         {/* Content */}
@@ -23,23 +43,64 @@ const Booknow = () => {
             forget. Book now and make your dreams come true.
           </p>
         </div>
-        <div className="backdrop-blur-md bg-white/20 p-10 rounded-xl w-full max-w-md text-white shadow-lg border border-white/30">
+
+        {/* Form */}
+        <div className="backdrop-blur-md bg-white/20 p-10 rounded-xl mt-30 w-full max-w-md text-white shadow-lg border border-white/30">
           <h2 className="text-2xl font-bold mb-4 text-center">
             Login to Continue
           </h2>
-          <form className="space-y-4">
+          <form className="space-y-4 " onSubmit={handleSubmit}>
+            <div>
+              <label className="block mb-1">Full Name</label>
+              <input
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={formData.name}
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
+                placeholder="Your Name"
+              />
+            </div>
             <div>
               <label className="block mb-1">Email</label>
               <input
+                name="email"
                 type="email"
-                className="w-full px-4 py-2 drop-shadow-md   rounded bg-white/10 border border-white/30 text-white focus:outline-none"
+                onChange={handleChange}
+                value={formData.email}
+                className="w-full px-4 py-2 drop-shadow-md rounded bg-white/10 border border-white/30 text-white focus:outline-none"
                 placeholder="you@google.com"
+              />
+            </div>
+            <div>
+              <label className="block mb-1">Phone Number</label>
+              <input
+                name="phone"
+                type="tel"
+                onChange={handleChange}
+                value={formData.phone}
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
+                placeholder="+91-1234567890"
+              />
+            </div>
+            <div>
+              <label className="block mb-1">Address</label>
+              <input
+                name="address"
+                type="text"
+                onChange={handleChange}
+                value={formData.address}
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
+                placeholder="123 Street Name, City"
               />
             </div>
             <div>
               <label className="block mb-1">Password</label>
               <input
+                name="password"
                 type="password"
+                onChange={handleChange}
+                value={formData.password}
                 className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
                 placeholder="••••••••"
               />
