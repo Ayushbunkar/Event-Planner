@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => (
-  <nav className="absolute bg-gray-900/50 top-0 left-0 w-full z-50   py-6">
-    <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-14">
+  <nav className="absolute  top-0 left-0 w-full z-50   py-6">
+    <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-evenly px-6 md:px-14">
 
-      <ul className="flex gap-6 md:gap-12 text-white uppercase text-sm tracking-wide font-bold mb-4 md:mb-0">
+      <ul className="flex gap-6 md:gap-20 text-white uppercase text-sm tracking-wide font-bold mb-4 md:mb-0">
         <li><Link to="/" className="hover:text-pink-400">HOME</Link></li>
         <li><Link to="/about" className="hover:text-pink-400">ABOUT</Link></li>
         <li><Link to="/stories" className="hover:text-pink-400">STORIES</Link></li>
-        <li><Link to="/morepages" className="hover:text-pink-400">MORE PAGES</Link></li>
+   
       </ul>
 
    
@@ -22,10 +22,10 @@ const Navbar = () => (
       </div>
 
   
-      <ul className="flex gap-6 md:gap-12 text-white uppercase text-sm tracking-wide font-bold">
+      <ul className="flex gap-6 md:gap-20 text-white uppercase text-sm tracking-wide font-bold">
         <li><Link to="/services" className="hover:text-pink-400">SERVICES</Link></li>
         <li><Link to="/gallery" className="hover:text-pink-400">GALLERY</Link></li>
-        <li><Link to="/elements" className="hover:text-pink-400">ELEMENTS</Link></li>
+       
         <li><Link to="/contact" className="hover:text-pink-400">CONTACT</Link></li>
       </ul>
 

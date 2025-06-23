@@ -2,7 +2,7 @@ import React from "react";
 
 const Journey = () => {
   return (
-    <div className="w-screen">
+    <div className="w-full">
       <div>
         
         <div className="max-w-4xl mx-auto text-center px-4 mt-12">

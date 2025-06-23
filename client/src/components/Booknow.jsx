@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Booknow = () => {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
-    phone: "",
-    address: "",
     password: "",
   });
 
@@ -18,8 +16,21 @@ const Booknow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Form submitted successfully!");
+
+    if (!formData.email || !formData.password) {
+      alert("Please enter both email and password.");
+      return;
+    }
+
+    if (
+      formData.email === "demo@wedding.com" &&
+      formData.password === "123456"
+    ) {
+      alert("Login successful!");
+      console.log("User logged in:", formData);
+    } else {
+      alert("Invalid email or password!");
+    }
   };
 
   return (
@@ -30,37 +41,22 @@ const Booknow = () => {
           backgroundImage: `url("https://media.weddingz.in/images/01701d9764082531a8c9212d22697bf6/Mandap-decoration-ideas20.jpg")`,
         }}
       >
-        <div className="absolute inset-0 bg-[rgba(0,0,0,0.0)] z-10 "></div>
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
-        {/* Content */}
         <div className="z-10 text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
             Your Magical Day Starts Here
           </h1>
           <p className="text-base md:text-lg max-w-xl mx-auto mb-6 drop-shadow">
-            Celebrate love, laughter, and memories with a wedding you'll never
-            forget. Book now and make your dreams come true.
+            Celebrate love, laughter, and memories with a wedding you'll never forget.
           </p>
         </div>
 
-        {/* Form */}
-        <div className="backdrop-blur-md bg-white/20 p-10 rounded-xl mt-30 w-full max-w-md text-white shadow-lg border border-white/30">
+        <div className="backdrop-blur-md bg-white/20 p-10 rounded-xl mt-30 w-full max-w-md text-white shadow-lg border border-white/30 z-10">
           <h2 className="text-2xl font-bold mb-4 text-center">
             Login to Continue
           </h2>
-          <form className="space-y-4 " onSubmit={handleSubmit}>
-            <div>
-              <label className="block mb-1">Full Name</label>
-              <input
-                name="name"
-                type="text"
-                onChange={handleChange}
-                value={formData.name}
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
-                placeholder="Your Name"
-              />
-            </div>
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block mb-1">Email</label>
               <input
@@ -70,28 +66,6 @@ const Booknow = () => {
                 value={formData.email}
                 className="w-full px-4 py-2 drop-shadow-md rounded bg-white/10 border border-white/30 text-white focus:outline-none"
                 placeholder="you@google.com"
-              />
-            </div>
-            <div>
-              <label className="block mb-1">Phone Number</label>
-              <input
-                name="phone"
-                type="tel"
-                onChange={handleChange}
-                value={formData.phone}
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
-                placeholder="+91-1234567890"
-              />
-            </div>
-            <div>
-              <label className="block mb-1">Address</label>
-              <input
-                name="address"
-                type="text"
-                onChange={handleChange}
-                value={formData.address}
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
-                placeholder="123 Street Name, City"
               />
             </div>
             <div>
@@ -112,6 +86,12 @@ const Booknow = () => {
               Login
             </button>
           </form>
+          <div className="text-center mt-4">
+            Don’t have an account?{" "}
+            <Link to="/register" className="text-pink-300 font-semibold hover:underline">
+              Register
+            </Link>
+          </div>
         </div>
       </section>
     </div>

@@ -4,6 +4,7 @@ import Journey from "./Journey";
 import Photogallery from "./Photogallery";
 import WhyWeddingPlanet from "./Whyweddingplanet";
 
+
 const Home = () => {
   return (
     <>
@@ -11,6 +12,7 @@ const Home = () => {
       <Journey />
       <Photogallery />
       <WhyWeddingPlanet /> 
+      
     </>
   );
 };
