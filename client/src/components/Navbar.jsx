@@ -18,7 +18,7 @@ const Navbar = () => (
           <i className="ri-empathize-line"></i>
         </span>
         <span className="text-2xl font-bold">Wedding Planet</span>
-        <span className="text-xs font-bold tracking-wide">Template</span>
+        <span className="text-xs font-bold tracking-wide">AK</span>
       </div>
 
   

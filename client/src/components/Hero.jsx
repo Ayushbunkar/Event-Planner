@@ -16,7 +16,8 @@ const Hero = () => {
           A Day to Remember <br /> A Love to Cherish
         </h1>
         <p className="text-lg max-w-xll mb-8  font-semibold drop-shadow-md ">
-          "From the moment you say 'yes' to the day you say 'I do', we’re here
+          "From the moment you say 'yes' to the day you say 'I do', we’
+          re here
           to make every <br /> detail magical, every moment memorable, and every
           feeling cherished — because your love story deserves nothing less."
         </p>

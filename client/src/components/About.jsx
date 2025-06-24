@@ -5,10 +5,16 @@ const About = () => {
        <section   className="h-200 w-full  bg-center relative  "
       style={{
         backgroundImage:
-          "url('https://i.pinimg.com/736x/8c/70/d2/8c70d27488b7b97c1bf7363da6a9a717.jpg')",
-      }}>  <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] z-10 "></div>
+          "url('https://images.pexels.com/photos/169211/pexels-photo-169211.jpeg')",
+      }}> 
+       <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] z-10 "></div>
+       <div className=" font-bold text-7xl  text-white text-shadow-2xs   pt-50  text-center "> <h1>About us </h1></div>
+
+
+      
       
       </section>
+      
    
   )
 }
