@@ -45,10 +45,10 @@ const Register = () => {
       <section
         className="min-h-screen w-full bg-no-repeat bg-center bg-cover relative flex items-center justify-center text-white"
         style={{
-          backgroundImage: `url("https://images.pexels.com/photos/931796/pexels-photo-931796.jpeg")`,
+          backgroundImage: `url("https://imgs.search.brave.com/stwlmFcv46Z-2qAVu0V366Vm1HzvsAR-nPPvdJHdsTE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMjI5/ODQ1LmpwZw")`,
         }}
       >
-        <div className="absolute inset-0 bg-black/50 z-0"></div>
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]  z-0"></div>
 
         <div className="z-10 mt-30 text-center px-4 absolute top-10">
           <h1 className="text-4xl md:text-5xl  font-bold mb-4 drop-shadow-lg">
