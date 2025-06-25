@@ -7,8 +7,11 @@ const About = () => {
         backgroundImage:
           "url('https://images.pexels.com/photos/169211/pexels-photo-169211.jpeg')",
       }}> 
-       <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] z-10 "></div>
-       <div className=" font-bold text-7xl  text-white text-shadow-2xs   pt-50  text-center "> <h1>About us </h1></div>
+       <div className="absolute  inset-0 bg-[rgba(0,0,0,0.6)]  "></div>
+       <div className="z-10 mt-30 text-center px-4 absolute top-10">
+          <h1 className="text-4xl md:text-5xl text-white text-center  font-bold mb-4 drop-shadow-lg">
+            Create an Account
+          </h1></div>
 
 <div></div>
       
