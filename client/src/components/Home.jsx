@@ -9,6 +9,7 @@ import WeddingPlannerForm from "./WeddingPlannerForm";
 import Footer from "./Footer";
 
 
+
 const Home = () => {
   return (
     <>
@@ -20,6 +21,7 @@ const Home = () => {
       <PricingPlans />
       <WeddingPlannerForm />
       <Footer />
+    
       
     </>
   );
