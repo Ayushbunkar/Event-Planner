@@ -4,6 +4,7 @@ import Journey from "./Journey";
 import Photogallery from "./Photogallery";
 import WhyWeddingPlanet from "./Whyweddingplanet";
 import Vendor from "./vendor";
+import PricingPlans from "./PricingPlans";
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <Vendor/>
       <Photogallery />
       <WhyWeddingPlanet /> 
+      <PricingPlans />
       
     </>
   );
