@@ -83,15 +83,15 @@ const PricingPlans = () => {
   const [billingCycle, setBillingCycle] = useState("monthly");
 
   return (
-    <section className="py-16 bg-white text-center" id="pricing">
+    <section className="py-16 shadow-lg shadow-black drop-shadow-2xl  bg-pink-100 text-center rounded   " id="pricing">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-pink-600 mb-4">Pricing Plans</h2>
+        <h2 className="text-5xl font-bold text-pink-600 mb-4 ">Pricing Plans</h2>
         <p className="text-gray-600 mb-10">
           Choose the plan that suits your dream wedding.
         </p>
 
-        {/* Toggle Switch */}
-        <div className="flex justify-center mb-10">
+        
+        <div className="flex justify-center shadow-black drop-shadow-2xl mb-10">
           <div className="inline-flex items-center space-x-4 bg-gray-200 p-1 rounded-full">
             <button
               onClick={() => setBillingCycle("monthly")}
@@ -116,8 +116,8 @@ const PricingPlans = () => {
           </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-10">
+       
+        <div className="grid md:grid-cols-3 shadow-black drop-shadow-2xl gap-10">
           {plans[billingCycle].map((plan, index) => (
             <div
               key={index}
@@ -152,7 +152,7 @@ const PricingPlans = () => {
                 ))}
               </ul>
               <button
-                className={`w-full py-2 rounded-md font-bold ${
+                className={`w-full py-2 rounded-md shadow-black drop-shadow-2xl font-bold ${
                   plan.highlighted
                     ? "bg-white text-pink-600 hover:bg-gray-100"
                     : "bg-pink-500 text-white hover:bg-pink-600"

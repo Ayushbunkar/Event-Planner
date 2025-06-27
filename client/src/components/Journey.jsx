@@ -43,7 +43,7 @@ const Journey = () => {
         </div>
 
      
-        <div className="max-w-7xl   shadow-lg shadow-black drop-shadow-2xl mx-auto px-6 mt-16 grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl shadow-lg shadow-black drop-shadow-2xl mx-auto px-6 mt-16 grid md:grid-cols-2 gap-12 items-center">
      
           <div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">

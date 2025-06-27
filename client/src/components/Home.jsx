@@ -5,6 +5,7 @@ import Photogallery from "./Photogallery";
 import WhyWeddingPlanet from "./Whyweddingplanet";
 import Vendor from "./vendor";
 import PricingPlans from "./PricingPlans";
+import WeddingPlannerForm from "./WeddingPlannerForm"; 
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <Photogallery />
       <WhyWeddingPlanet /> 
       <PricingPlans />
+      <WeddingPlannerForm />
       
     </>
   );
