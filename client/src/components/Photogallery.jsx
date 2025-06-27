@@ -1,146 +1,48 @@
 import React from "react";
 
-const Photogallery = () => {
+const PhotoGallery = () => {
+  const images = [
+    "https://i.pinimg.com/736x/d7/ee/0a/d7ee0aee8948e2f2782bb8babd5c344c.jpg", // bride looking back
+    "https://i.pinimg.com/736x/8b/bd/25/8bbd25cf150b3bfa136aafd9eafd259e.jpg", // couple holding hands
+    "https://i.pinimg.com/736x/b0/0b/88/b00b885e2fa7f15eea5a07293864922d.jpg", // wedding shoes
+    "https://i.pinimg.com/736x/ff/02/c5/ff02c5a3b5a0e50828ac44607df96279.jpg", // wedding rings
+    "https://i.pinimg.com/736x/10/34/43/103443b385a48efd93de049d16d53cd4.jpg", // bride makeup
+    "https://i.pinimg.com/736x/fa/9e/8e/fa9e8e93bd4ea928005107478ae13375.jpg", // groom suit
+    "https://i.pinimg.com/736x/40/3b/34/403b34247d1129890d17a3eaa0eb6052.jpg",   // bride with bouquet
+    "https://i.pinimg.com/736x/e2/f9/b1/e2f9b11d57a5338a487dd0e9e1e427af.jpg", // dress details
+    "https://i.pinimg.com/736x/5d/9c/f0/5d9cf0446558bb5dcd200b6a4952f7a2.jpg", // wedding cake
+  ];
+
   return (
     <section className="py-20 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <h2 className=" md:text-5xl mt-10 font-bold text-center   mb-10">Vendor categories</h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+      <div className="max-w-6xl mx-auto text-center">
+        <div className="mb-10">
+          <img
+            src="https://img.icons8.com/ios-filled/50/fa314a/picture.png"
+            alt="Gallery Icon"
+            className="mx-auto mb-3"
+          />
+          <h2 className="text-3xl font-bold text-pink-700 mb-2">Photo Gallery</h2>
+          <p className="text-gray-600">Captured Moments From Magical Weddings</p>
+        </div>
 
-          {/* Makeup Artists */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/bridal-makeup-artists.jpg"
-              alt="Makeup Artists"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Makeup Artists</h3>
-              <p className="text-xs text-gray-500">22,601</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-6">
+          {images.map((src, idx) => (
+            <div
+              key={idx}
+              className="overflow-hidden rounded-lg shadow  hover:shadow-xl transition duration-300 transform hover:scale-105"
+            >
+              <img
+                src={`${src}?w=600&h=400&fit=crop`}
+                alt={`Wedding shot ${idx + 1}`}
+                className="w-full h-130  object-cover"
+              />
             </div>
-          </div>
-
-          {/* Wedding Planners */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-planners.jpg"
-              alt="Planners"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Planners</h3>
-              <p className="text-xs text-gray-500">3,461</p>
-            </div>
-          </div>
-
-          {/* Decorators */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-decorators.jpg"
-              alt="Decorators"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Decorators</h3>
-              <p className="text-xs text-gray-500">3,430</p>
-            </div>
-          </div>
-
-          {/* Caterers */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/catering.jpg"
-              alt="Caterers"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Caterers</h3>
-              <p className="text-xs text-gray-500">1,321</p>
-            </div>
-          </div>
-
-          {/* Jewellery */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-jewellery.jpg"
-              alt="Jewellery"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Jewellery</h3>
-              <p className="text-xs text-gray-500">221</p>
-            </div>
-          </div>
-
-          {/* Photographers */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-photographers.jpg"
-              alt="Photographers"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Photographers</h3>
-              <p className="text-xs text-gray-500">20,425</p>
-            </div>
-          </div>
-
-          {/* Venues */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-venues.jpg"
-              alt="Venues"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Venues</h3>
-              <p className="text-xs text-gray-500">42,267</p>
-            </div>
-          </div>
-
-          {/* Mehendi Artists */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/mehndi-artists.jpg"
-              alt="Mehendi Artists"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Mehendi Artists</h3>
-              <p className="text-xs text-gray-500">3,156</p>
-            </div>
-          </div>
-
-          {/* Invitations */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/wedding-cards.jpg"
-              alt="Invitations"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">Invitations</h3>
-              <p className="text-xs text-gray-500">385</p>
-            </div>
-          </div>
-
-          {/* DJs */}
-          <div className="bg-white shadow rounded overflow-hidden hover:shadow-lg transition">
-            <img
-              src="https://img.weddingbazaar.com/shaadisaga_production/static/vendor_categories/dj.jpg"
-              alt="DJs"
-              className="w-full h-32 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-semibold text-gray-800">DJs</h3>
-              <p className="text-xs text-gray-500">268</p>
-            </div>
-          </div>
-
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default Photogallery;
+export default PhotoGallery;
