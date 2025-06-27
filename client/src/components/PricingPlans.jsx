@@ -83,7 +83,7 @@ const PricingPlans = () => {
   const [billingCycle, setBillingCycle] = useState("monthly");
 
   return (
-    <section className="py-16 shadow-lg shadow-black drop-shadow-2xl  bg-pink-100 text-center rounded   " id="pricing">
+    <section className="py-16 shadow-lg  bg-pink-100 text-center rounded   " id="pricing">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-5xl font-bold text-pink-600 mb-4 ">Pricing Plans</h2>
         <p className="text-gray-600 mb-10">

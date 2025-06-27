@@ -6,6 +6,7 @@ import WhyWeddingPlanet from "./Whyweddingplanet";
 import Vendor from "./vendor";
 import PricingPlans from "./PricingPlans";
 import WeddingPlannerForm from "./WeddingPlannerForm"; 
+import Footer from "./Footer";
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
       <WhyWeddingPlanet /> 
       <PricingPlans />
       <WeddingPlannerForm />
+      <Footer />
       
     </>
   );
