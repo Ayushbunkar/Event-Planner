@@ -50,7 +50,7 @@ const Stories = () => {
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
+  
       <section
         className="min-h-screen w-full bg-no-repeat bg-center bg-cover relative flex items-center justify-center text-white"
         style={{
@@ -72,7 +72,7 @@ const Stories = () => {
         </div>
       </section>
 
-      {/* Couple Stories */}
+   
       <section ref={storiesRef} className="bg-white py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Couple Stories 💕</h2>
@@ -102,7 +102,6 @@ const Stories = () => {
         </div>
       </section>
 
-      {/* Animated Story Cards */}
       <section className="bg-white py-20 px-4">
         <div className="max-w-7xl mx-auto text-center mb-12">
           <motion.h2
@@ -153,7 +152,6 @@ const Stories = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer
         className="relative bg-black text-white bg-cover bg-center"
         style={{
