@@ -1,115 +1,279 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
-// Section 1: Hero & Featured Gallery
-const FeaturedGallery = () => {
-  const images = [
-    "https://i.pinimg.com/736x/98/46/b9/9846b9514af7ceb6274d31e25fb6b12e.jpg",
-    "https://i.pinimg.com/736x/6d/fe/d2/6dfed272d6cc4c79efb2c3ce2e3b5881.jpg",
-    "https://i.pinimg.com/736x/0b/4a/ea/0b4aea85e215e8663af7d6d3331c02f9.jpg",
-    "https://i.pinimg.com/736x/79/4b/93/794b93bde63bfd674fe27c368371e6ca.jpg",
-    "https://i.pinimg.com/736x/ee/a2/88/eea2889c61e799ae1c3dbc4f6f64c5d4.jpg",
-    "https://i.pinimg.com/736x/fb/bf/fd/fbbffde653371b03dadcd1c165f5e3a3.jpg",
-  ];
-
+// ✅ About Hero Section
+const AboutHero = () => {
   return (
-    <div className="w-full">
-     
-      <div
-        className="w-full h-[80vh] bg-cover bg-center flex items-center justify-center relative"
-        style={{
-          backgroundImage:
-            "url('https://i.pinimg.com/736x/bb/a6/ae/bba6ae543ed46c1f3183efd55eed61b1.jpg')",
-        }}
-      >
-        <div className="absolute inset-0  bg-opacity-50 z-0"></div>
-        <div className="z-10 text-white text-center">
-          <h1 className="text-5xl md:text-6xl font-bold">Our Gallery</h1>
+    <section
+      className="w-full min-h-screen bg-center bg-cover relative text-white"
+      style={{
+        backgroundImage:
+          "url('https://imgs.search.brave.com/jg0IqkgWmVWKvTJd65SPKEt3rLVT1rCtRY0apNQbsBI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA5LzkxLzE0LzA4/LzM2MF9GXzk5MTE0/MDg3N193a0VXSlEx/akx4NlBydTVFUUhi/SE9kRVpXSHhNTDI2/dy5qcGc')",
+      }}
+    >
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="relative z-10 pt-55 max-w-5xl mx-auto px-6 py-20 text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-5xl font-bold md:text-5xl text-white drop-shadow-lg mb-6"
+        >
+          About Us ❤️
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-lg max-w-3xl mx-auto mb-10 text-gray-200"
+        >
+          We are a passionate team dedicated to making your special day truly magical.
+          With curated vendors, personalized experiences, and heartfelt service,
+          we help couples celebrate love in the most memorable way.
+        </motion.p>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {["📋", "💡", "💬"].map((icon, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + i * 0.2 }}
+              className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md hover:shadow-lg transition"
+            >
+              <div className="text-4xl mb-4">{icon}</div>
+              <h3 className="text-xl font-semibold mb-2 text-pink-300">
+                {[
+                  "Verified Vendors",
+                  "Personalized Planning",
+                  "24/7 Support",
+                ][i]}
+              </h3>
+              <p className="text-sm text-gray-200">
+                {[
+                  "Only the best and most trusted wedding professionals are listed on our platform.",
+                  "We help you plan your dream wedding with personalized suggestions and ideas.",
+                  "Our support team is here to help at every step of your wedding journey.",
+                ][i]}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      {/* Grid of Featured Photos */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-              Captured Moments of Love
-            </h2>
-            <p className="text-gray-500 max-w-xl mx-auto">
-              Cherish the memories of our lovely couples through these handpicked moments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {images.map((img, idx) => (
-              <div
-                key={idx}
-                className="rounded-lg shadow-lg transform hover:scale-105 transition duration-300"
-              >
-                <img src={img} alt={`Wedding ${idx}`} className="w-full h-80 object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+    </section>
   );
 };
 
-// Section 2: Monthly Galleries
-const MonthlyGallerySection = () => {
-  const galleryData = {
-    "June 2024": [
-      "https://images.unsplash.com/photo-1508672019048-805c876b67e2",
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
-      "https://images.unsplash.com/photo-1520763185298-1b434c919102",
-      "https://images.unsplash.com/photo-1549880189-1682456dbeba",
-      "https://images.unsplash.com/photo-1549887534-3240b3e3dbb2",
-      "https://images.unsplash.com/photo-1559628233-b4f1b0c3d6b1",
-    ],
-    "May 2024": [
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde",
-      "https://images.unsplash.com/photo-1510414696678-2415ad8474aa",
-      "https://images.unsplash.com/photo-1609791254269-379b6c9a1b15",
-      "https://images.unsplash.com/photo-1598515213704-4b9b9799c8e2",
-      "https://images.unsplash.com/photo-1551270070-0cec2fcd9f4d",
-      "https://images.unsplash.com/photo-1579547621706-1a9c79d5ffa0",
-    ],
-  };
+const team = [
+  {
+    name: "Alex Bennett",
+    role: "Lead Planner",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZW1wbG95ZWV8ZW58MHx8MHx8fDA%3D",
+  },
+  {
+    name: "Morgan Davis",
+    role: "Creative Director",
+    image: "https://media.istockphoto.com/id/1483473258/photo/smiling-young-woman-professional-in-formal-wear-with-arms-crossed-and-looking-at-camera.webp?a=1&b=1&s=612x612&w=0&k=20&c=Lvu-u4DzvgAExdTm2cXRVc-4pqXcKafhDrZkictyVUU=",
+  },
+  {
+    name: "Jordan Taylor",
+    role: "Client Manager",
+    image: "https://media.istockphoto.com/id/2148419703/photo/portrait-of-a-young-indian-man-in-glasses-and-a-white-shirt-standing-near-an-office-building.jpg?s=612x612&w=0&k=20&c=l-wRsIXn0OdP4m-_Xkf2Q_C2wHPlAMTKOVwzORxXnvs=",
+  },
+];
 
-  return (
-    <div className="py-16 px-6 bg-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {Object.entries(galleryData).map(([month, images]) => (
-          <div key={month}>
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">{month}</h2>
-            <p className="text-gray-500 mb-6">
-              Memorable celebrations captured this month.
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              {images.map((src, index) => (
-                <img
-                  key={index}
-                  src={src}
-                  alt={`Gallery ${month} ${index}`}
-                  className="w-full h-64 object-cover rounded-lg shadow hover:scale-105 transition-all duration-300"
-                />
-              ))}
+const TeamSection = () => (
+  <section className="bg-white py-20 px-4">
+    <div className="max-w-7xl mx-auto text-center">
+      <div className="mb-12">
+        <div className="text-pink-600 text-4xl mb-2">👨‍👩‍👧‍👦</div>
+        <h2 className="text-4xl font-bold text-gray-800 mb-2">Meet our Team</h2>
+        <p className="text-gray-500">Purus velit at volutpat sapien ullamcorper rhoncus.</p>
+      </div>
+      <div className="grid md:grid-cols-3 gap-10 mt-10">
+        {team.map((member, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.05 }}
+            className="flex flex-col items-center justify-center transition duration-300"
+          >
+            <img src={member.image} alt={member.name} className="w-40 h-40 rounded-full object-cover mb-4 shadow-lg" />
+            <h3 className="text-xl font-bold text-gray-800 mb-1">{member.name}</h3>
+            <p className="text-gray-500 mb-4">Lorem ipsum dolor consectetur sadipscing diam nonumy tempor.</p>
+            <div className="flex space-x-4 text-pink-600 text-xl">
+              <a href="#"><FaFacebookF /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaLinkedinIn /></a>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
+  </section>
+);
+
+const ClientTestimonials = () => (
+  <section className="bg-pink-500 py-20 px-4">
+    <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-10">
+      <div>
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          What Our <br /> Clients Are Saying
+        </h2>
+        <p className="text-pink-100 text-lg mb-6">
+          Fusce ac condimentum turpis. Ut consequat lacinia augue, vitae aliquam sapien ullamcorper at.
+        </p>
+        <a href="#" className="inline-block text-white font-semibold hover:underline">
+          LEARN MORE →
+        </a>
+      </div>
+      <motion.div whileHover={{ scale: 1.05 }} className="relative bg-white shadow-xl rounded-lg p-8">
+        <p className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
+          "Choose a life partner not because you can merely live with them,
+          but because you cannot imagine living without them."
+        </p>
+        <div className="text-right">
+          <span className="text-white font-bold text-lg bg-black px-4 py-1 rounded">
+            Emmie
+          </span>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+const Stories = () => {
+  const stories = [
+    {
+      title: "Love Chronicles",
+      description: "Lorem ipsum dolor sit amet...",
+      image: "https://i.pinimg.com/736x/98/46/b9/9846b9514af7ceb6274d31e25fb6b12e.jpg",
+    },
+    {
+      title: "Epic Celebrations",
+      description: "Lorem ipsum dolor sit amet...",
+      image: "https://i.pinimg.com/736x/6d/fe/d2/6dfed272d6cc4c79efb2c3ce2e3b5881.jpg",
+    },
+    {
+      title: "Behind the Scenes",
+      description: "Lorem ipsum dolor sit amet...",
+      image: "https://i.pinimg.com/736x/0b/4a/ea/0b4aea85e215e8663af7d6d3331c02f9.jpg",
+    },
+  ];
+
+  return (
+    <section className="py-20 px-4 bg-white">
+      <div className="max-w-7xl mx-auto text-center mb-12">
+        <h2 className="text-4xl font-bold text-gray-800 mb-2">Our Stories</h2>
+        <p className="text-gray-500">Real moments, real emotions – captured forever.</p>
+      </div>
+      <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        {stories.map((s, i) => (
+          <motion.div key={i} whileHover={{ scale: 1.03 }} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <img src={s.image} alt={s.title} className="w-full h-80 object-cover" />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">{s.title}</h3>
+              <p className="text-gray-600 text-sm mb-4">{s.description}</p>
+              <a href="#" className="text-pink-600 font-semibold hover:underline">Read More →</a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
   );
 };
 
-// Final Exported Component
-const Gallery = () => {
+const Newsletter = () => {
+  const [email, setEmail] = useState("");
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email) return alert("Please enter an email address.");
+    alert(`Subscribed with: ${email}`);
+    setEmail("");
+  };
+
+  return (
+    <div className="bg-white py-20 px-4 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Newsletter Updates</h2>
+      <p className="text-gray-500 mb-8">Enter your email to subscribe to our tasty newsletter.</p>
+      <form
+        onSubmit={handleSubscribe}
+        className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-xl mx-auto"
+      >
+        <input
+          type="email"
+          placeholder="Your email address"
+          className="w-full sm:w-96 px-4 py-3 border border-gray-300 rounded-md"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button type="submit" className="px-6 py-3 bg-black text-white rounded-md hover:bg-gray-800">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  );
+};
+
+const Footer = () => (
+  <footer
+    className="relative bg-black text-white bg-cover bg-center"
+    style={{
+      backgroundImage:
+        "url('https://img.freepik.com/free-photo/newlywed-couple-face-face-close-up_23-2148723284.jpg')",
+    }}
+  >
+    <div className="absolute inset-0 bg-black opacity-70"></div>
+    <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div>
+        <h3 className="text-2xl font-bold mb-4">Head Office</h3>
+        <p className="text-sm">9016 Goldfield Street, South Richmond Hill,<br />New York 11419</p>
+        <p className="mt-2 text-sm">example@gmail.com</p>
+        <p className="text-sm">+1 578-393-4937</p>
+      </div>
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-pink-400 mb-2">Wedding Planet</h2>
+        <p className="text-sm mb-4">Purus velit at volutpat sapien ullamcorper rhoncus.</p>
+        <p className="text-xs mb-6">Egestas purus viverra accumsan in. Nisi in metus dictum at tempor commodo.</p>
+        <div className="flex justify-center gap-4 text-lg">
+          <a href="#"><FaFacebookF /></a>
+          <a href="#"><FaTwitter /></a>
+          <a href="#"><FaInstagram /></a>
+          <a href="#"><FaLinkedinIn /></a>
+        </div>
+      </div>
+      <div className="text-right">
+        <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
+        <ul className="space-y-2 text-sm">
+          <li><a href="/services">Services</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/stories">Stories</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div className="relative z-10 text-center border-t border-white/20 py-4 px-4 text-xs flex flex-col md:flex-row items-center justify-between">
+      <p>© Website Name 2025</p>
+      <div className="space-x-4">
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+);
+
+const AboutPage = () => {
   return (
     <>
-      <FeaturedGallery />
-      <MonthlyGallerySection />
+      <AboutHero />
+      <TeamSection />
+      <ClientTestimonials />
+      <Stories />
+      <Newsletter />
+      <Footer />
     </>
   );
 };
 
-export default Gallery;
+export default AboutPage;
