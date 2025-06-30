@@ -1,6 +1,18 @@
+// src/pages/ServicesPage.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaCrown, FaBirthdayCake, FaCamera, FaMusic, FaGlassCheers } from "react-icons/fa";
+import {
+  FaCrown,
+  FaBirthdayCake,
+  FaCamera,
+  FaMusic,
+  FaGlassCheers,
+  FaCheckCircle,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn
+} from "react-icons/fa";
 
 const services = [
   {
@@ -32,6 +44,34 @@ const services = [
     icon: <FaGlassCheers className="text-pink-500 text-4xl mb-4" />,
     title: "Catering & Drinks",
     description: "Delectable menus and premium beverages tailored for your guests."
+  }
+];
+
+const pricingPlans = [
+  {
+    title: "Classic Love",
+    price: "₹30,000",
+    features: ["Venue Booking", "Photography", "Basic Floral Decor", "1 Day Coordination"]
+  },
+  {
+    title: "Royal Affair",
+    price: "₹75,000",
+    features: [
+      "Premium Venue + Decor",
+      "Custom Cake & Catering",
+      "Professional Photographer",
+      "2 Days Coverage"
+    ]
+  },
+  {
+    title: "Dream Wedding",
+    price: "₹1,50,000",
+    features: [
+      "All-inclusive Services",
+      "Luxury Venue",
+      "Live Music & DJ",
+      "Full Planning & Execution"
+    ]
   }
 ];
 
@@ -70,9 +110,7 @@ const ServicesPage = () => {
       {/* Services Cards */}
       <section className="bg-white py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-12">
-            What We Offer
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-12">What We Offer</h2>
           <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-10">
             {services.map((service, index) => (
               <motion.div
@@ -84,15 +122,123 @@ const ServicesPage = () => {
                 className="bg-pink-50 p-6 rounded-xl shadow hover:shadow-lg transition"
               >
                 {service.icon}
-                <h3 className="text-xl font-semibold text-pink-700 mb-2">
-                  {service.title}
-                </h3>
+                <h3 className="text-xl font-semibold text-pink-700 mb-2">{service.title}</h3>
                 <p className="text-gray-600 text-sm">{service.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Why Choose Us Section */}
+      <section className="bg-white py-20 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl font-bold text-gray-800 mb-6"
+          >
+            Why Choose Us?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-gray-600 text-lg"
+          >
+            From luxurious setups to heartfelt coordination, we bring years of expertise to your
+            special day — making every celebration personal, passionate, and perfect.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Pricing Plans */}
+      <section className="bg-pink-50 py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 text-gray-800">Pricing Plans</h2>
+          <p className="text-gray-500">Choose a package that fits your dreams and budget.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {pricingPlans.map((plan, idx) => (
+            <motion.div
+              key={idx}
+              className="bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-xl font-semibold mb-2">{plan.title}</h3>
+              <p className="text-3xl font-bold text-pink-600 mb-4">{plan.price}</p>
+              <ul className="text-sm text-gray-600 mb-6 space-y-2 text-left">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-center">
+                    <FaCheckCircle className="text-pink-500 mr-2" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button className="px-6 py-2 bg-pink-500 text-white rounded hover:bg-pink-600">
+                Choose Plan
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer
+        className="relative bg-black text-white bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://img.freepik.com/free-photo/newlywed-couple-face-face-close-up_23-2148723284.jpg')"
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-white">
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Head Office</h3>
+            <p className="text-sm">
+              9016 Goldfield Street, South Richmond Hill,<br />New York 11419
+            </p>
+            <p className="mt-2 text-sm">example@gmail.com</p>
+            <p className="text-sm">+1 578-393-4937</p>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-pink-400 mb-2">Wedding Planet</h2>
+            <p className="text-sm mb-4">Your dream wedding starts here.</p>
+            <p className="text-xs mb-6">Every detail matters, every love story deserves magic.</p>
+            <div className="flex justify-center gap-4 text-lg">
+              <a href="#"><FaFacebookF /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaInstagram /></a>
+              <a href="#"><FaLinkedinIn /></a>
+            </div>
+          </div>
+
+          <div className="text-right">
+            <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/stories">Stories</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="relative z-10 text-center border-t border-white/20 py-4 px-4 text-xs flex flex-col md:flex-row items-center justify-between">
+          <p>© Wedding Planet 2025</p>
+          <div className="space-x-4">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
