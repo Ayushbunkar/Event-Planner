@@ -80,31 +80,62 @@ const ServicesPage = () => {
     <div className="w-full">
       {/* Hero Section */}
       <section
-        className="min-h-[70vh] w-full bg-no-repeat bg-center bg-cover flex items-center justify-center text-white relative"
+        className="min-h-[100vh]  w-full bg-no-repeat bg-center flex bg-cover  items-center justify-center text-white relative"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-photo/beautiful-bride-with-veil-earrings_23-2148723284.jpg')"
+            "url('https://plus.unsplash.com/premium_photo-1682092637891-d9979cc93f6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aW5kaWFuJTIwd2VkZGluZyUyMGRlY29yfGVufDB8fDB8fHww')"
         }}
       >
         <div className="absolute inset-0 bg-black/60 z-0"></div>
-        <div className="z-10 text-center px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl font-bold drop-shadow-lg"
-          >
-            Our Services
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="text-lg mt-4 drop-shadow max-w-xl mx-auto"
-          >
-            Discover everything we offer to make your wedding day perfect.
-          </motion.p>
+      
+      <div className="relative z-10 pt-28 max-w-5xl mx-auto px-6 pb-16 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl font-bold md:text-5xl text-white drop-shadow-lg mb-6"
+        >
+          Why Couples Love Us ❤️
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-lg max-w-3xl mx-auto mb-10 text-gray-200"
+        >
+          Trusted by thousands of couples for seamless planning, elegant execution, and unforgettable memories.
+        </motion.p>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {["🎯", "💍", "🤝"].map((icon, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + i * 0.2 }}
+              className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md hover:shadow-lg scale-100 hover:scale-105 scroll-smooth transition"
+            >
+              <div className="text-4xl mb-4">{icon}</div>
+              <h3 className="text-xl font-semibold mb-2 text-pink-300">
+                {[
+                  "End-to-End Services",
+                  "Perfectly Tailored",
+                  "Community Trusted",
+                ][i]}
+              </h3>
+              <p className="text-sm text-gray-200">
+                {[
+                  "From flowers to DJs, everything you need in one place—easy and worry-free.",
+                  "Each detail is customized to reflect your love story beautifully.",
+                  "Thousands of happy couples and 5-star vendor ratings speak for themselves.",
+                ][i]}
+              </p>
+            </motion.div>
+          ))}
         </div>
+      </div>
+
       </section>
 
       {/* Services Cards */}
