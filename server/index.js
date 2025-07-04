@@ -5,13 +5,22 @@ import authRouter from "./src/routes/authRouter.js";
 dotenv.config();
 
 const app = express();
+
+
 app.use(express.json());
 
 app.use("/auth",authRouter);
+
+
 app.get("/",(request,response)=>{
     response.json({message:"main server hoon"})
 });
 
+app.use((error,request,response,next)=>{
+
+    const errorMessage= err.message||"Internal Server error"
+    const errorCode=err.statusCode
+})
 
 const port =process.env.PORT || 5000;
 app.listen(port,()=>{
