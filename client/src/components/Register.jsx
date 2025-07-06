@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import api from "../config/api";
+import {toast} from "react-hot-toast"
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,18 +11,22 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  // ✅ Handle form field changes
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  // ✅ Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { name, email, phone, password, confirmPassword } = formData;
 
+    // Frontend validation
     if (!name || !email || !phone || !password || !confirmPassword) {
       alert("Please fill all fields.");
       return;
@@ -36,10 +42,28 @@ const Register = () => {
       return;
     }
 
-    console.log("Registered Successfully:", formData);
-    alert("You have registered successfully!");
-  };
+   
+    try {
+      const res = await api.post("/auth/register", {
+        name,
+        email,
+        phone,
+        password,
+      });
 
+      toast.success(res.data.message);
+      
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className="w-full">
       <section

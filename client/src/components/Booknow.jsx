@@ -1,35 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import api from "../config/api";
+import { toast } from "react-hot-toast";
 
 const Booknow = () => {
+  const navigate =useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      alert("Please enter both email and password.");
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      toast.error("Please enter both email and password.");
       return;
     }
 
-    if (
-      formData.email === "demo@wedding.com" &&
-      formData.password === "123456"
-    ) {
-      alert("Login successful!");
-      console.log("User logged in:", formData);
-    } else {
-      alert("Invalid email or password!");
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      toast.success(res.data.message || "Login successful!");navigate('/userashboard')
+
+    
+      setFormData({ email: "", password: "" });
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 

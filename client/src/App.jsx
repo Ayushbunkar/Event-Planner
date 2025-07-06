@@ -9,25 +9,26 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Booknow from "./components/Booknow";
 import Register from "./components/Register";
-
-
+import UserDashboard from "./components/UserDashboard";   
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Toaster />
       <Navbar />
-       <main className="w-full min-h-screen">
-    
-      <Routes>
-        <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
+      <main className="w-full min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/services" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/booknow" element={<Booknow />} />
-          <Route path="/register" element={<Register />} /> 
-      </Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/userDashboard" element={<UserDashboard />} />
+        </Routes>
       </main>
     </BrowserRouter>
   );
