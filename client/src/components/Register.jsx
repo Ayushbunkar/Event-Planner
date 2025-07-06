@@ -26,7 +26,7 @@ const Register = () => {
 
     const { name, email, phone, password, confirmPassword } = formData;
 
-    // Frontend validation
+    // Frontend validation /mbj
     if (!name || !email || !phone || !password || !confirmPassword) {
       alert("Please fill all fields.");
       return;
