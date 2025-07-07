@@ -31,7 +31,7 @@ const Booknow = () => {
 
     try {
       const res = await api.post("/auth/login", { email, password });
-      toast.success(res.data.message || "Login successful!");navigate('/userashboard')
+      toast.success(res.data.message || "Login successful!");navigate('/userDashboard')
 
     
       setFormData({ email: "", password: "" });
