@@ -1,7 +1,6 @@
 import { response } from "express";
 import user from "../models/userModels.js";
 import bcrypt from"bcrypt";
-// import { JsonWebTokenError } from "jsonwebtoken";
 import genToken from "../utils/auth.js";
 
 export const RegisterUser = async (req, res, next) => {
@@ -64,7 +63,7 @@ export const LoginUser = async (req, res, next) => {
       return next(error);
     }
 
-    genToken(user._id,res)
+    genToken(existingUser._id,res)
 
     res.status(200).json({message: `Welcomeb Back ${existingUser.name}`,data:existingUser,});
 

@@ -4,17 +4,20 @@ import dotenv from 'dotenv';
 import authRouter from "./src/routes/authRouter.js";
 import morgan from 'morgan';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import userRouter from "./src/routes/userRoutes.js"
 dotenv.config();
 
 const app = express();
 app.use(cors({origin:"http://localhost:5173",credentials : true}));
 
 app.use(express.json()); // readable data convert
+app.use(cookieParser());
 app.use(morgan("dev"));
 
 
 app.use("/auth",authRouter);
-
+app.use("/user",userRouter);
 
 app.get("/",(request,response)=>{
     response.json({message:"main server hoon"})

@@ -11,7 +11,7 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  // ✅ Handle form field changes
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -20,13 +20,12 @@ const Register = () => {
     }));
   };
 
-  // ✅ Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { name, email, phone, password, confirmPassword } = formData;
 
-    // Frontend validation /mbj
     if (!name || !email || !phone || !password || !confirmPassword) {
       alert("Please fill all fields.");
       return;

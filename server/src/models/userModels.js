@@ -18,6 +18,7 @@ confirmPassword:{
     type:String,
     require:true,
 },
+
 },
 
 {timestamps:true}
