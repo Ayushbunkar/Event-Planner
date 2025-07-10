@@ -1,22 +1,27 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+// Components
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
 import Stories from "./components/Stories";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
-import About from "./components/About";
-import Home from "./components/Home";
 import Booknow from "./components/Booknow";
 import Register from "./components/Register";
-import UserDashboard from "./components/UserDashboard";   
-import { Toaster } from "react-hot-toast";
+import UserDashboard from "./components/UserDashboard";
+import UserDashboardedit from "./components/UserDashboardedit"; 
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Toaster />
+    <header> <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
+</header>
+      
       <main className="w-full min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,6 +33,17 @@ const App = () => {
           <Route path="/booknow" element={<Booknow />} />
           <Route path="/register" element={<Register />} />
           <Route path="/userDashboard" element={<UserDashboard />} />
+          <Route path="/edit-dashboard" element={<UserDashboardedit />} />
+          
+          {/* Optional 404 Page */}
+          <Route
+            path="*"
+            element={
+              <div className="p-10 text-center text-red-600 font-semibold text-lg">
+                404 - Page Not Found
+              </div>
+            }
+          />
         </Routes>
       </main>
     </BrowserRouter>

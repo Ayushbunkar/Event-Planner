@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import userRouter from "./src/routes/userRoutes.js"
+
 dotenv.config();
 
 const app = express();

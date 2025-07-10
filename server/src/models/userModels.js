@@ -19,6 +19,11 @@ confirmPassword:{
     require:true,
 },
 
+photo:{
+    type:String,
+    require:true,
+    default:"",
+}
 },
 
 {timestamps:true}

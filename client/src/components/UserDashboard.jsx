@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import api from "../config/api";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
-  const [userdata, setUserData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    wallet: 5000,
-    lastLogin: "6 July, 2025",
-    ip: "192.168.1.23",
-    device: "Chrome on Windows",
-    notifications: [],
-    events: []
-  });
-
+  const [userdata, setUserData] = useState(null);
   const [activeSection, setActiveSection] = useState("Dashboard");
+  const navigate = useNavigate();
 
   const fetchUserData = async () => {
     try {
       const res = await api.get("/user/profile");
-      setUserData(res.data.data);
+      const user = res.data.data;
+
+      // Cache busting for profile photo
+      if (user.photo) {
+        user.photo = `${user.photo}?t=${Date.now()}`;
+      }
+
+      setUserData(user);
       toast.success(res.data.message);
     } catch (error) {
       toast.error(
@@ -41,7 +39,7 @@ const UserDashboard = () => {
     "Notifications",
     "Event Timeline",
     "Login Activity",
-    "Account Settings"
+    "Account Settings",
   ];
 
   const SidebarItem = ({ label }) => (
@@ -59,15 +57,10 @@ const UserDashboard = () => {
 
   const WalletSection = () => (
     <div className="bg-white rounded-xl shadow-md p-6 border border-[#e0c9a6]">
-      <div className="flex justify-between items-center">
-        <div>
-          <h3 className="text-lg font-semibold text-[#5e2c04] mb-1">Wallet Balance</h3>
-          <p className="text-2xl font-bold text-[#8b1f1f]">₹{userdata.wallet}</p>
-        </div>
-        <button className="bg-[#8b1f1f] text-white px-4 py-2 rounded-md hover:bg-[#a83232] text-sm">
-          Add Funds
-        </button>
-      </div>
+      <h3 className="text-lg font-semibold text-[#5e2c04] mb-1">
+        Wallet Balance
+      </h3>
+      <p className="text-2xl font-bold text-[#8b1f1f]">₹{userdata.wallet}</p>
     </div>
   );
 
@@ -116,44 +109,82 @@ const UserDashboard = () => {
     </div>
   );
 
+  if (!userdata) return <div className="p-10">Loading...</div>;
+
   return (
-    <div className="min-h-screen bg-[#f9f4ef] flex flex-col md:flex-row">
-      {/* Sidebar */}
-      <aside className="w-full md:w-1/4 bg-white border-r border-[#e0c9a6] p-6">
-        <div className="text-center mb-8">
-          <div className="w-24 h-24 rounded-full mx-auto bg-[#f5e0c0] text-[#8b1f1f] flex items-center justify-center text-3xl font-bold">
-            {userdata.name.charAt(0)}
+    <>
+      {/* Custom Navbar (Only for Dashboard) */}
+      <nav className="flex justify-between items-center px-6 py-4 bg-[#f5e0c0] shadow-sm border-b border-[#e0c9a6]">
+        <h1 className="text-xl font-semibold text-[#5e2c04]">User Dashboard</h1>
+        {userdata.photo ? (
+          <img
+            src={userdata.photo}
+            alt="Profile"
+            className="w-10 h-10 rounded-full border-2 border-[#8b1f1f]"
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full bg-[#8b1f1f] text-white flex items-center justify-center text-lg font-bold">
+            {userdata.name?.charAt(0)}
           </div>
-          <h2 className="mt-4 text-xl font-semibold text-[#5e2c04]">{userdata.name}</h2>
-          <p className="text-sm text-[#946231]">{userdata.email}</p>
-          <p className="text-sm text-[#946231]">{userdata.phone}</p>
-        </div>
-        <nav className="space-y-4 text-[#6b3b11] text-sm">
-          {sections.map((s) => (
-            <SidebarItem key={s} label={s} />
-          ))}
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6 space-y-6">
-        {activeSection === "Dashboard" && (
-          <>
-            <WalletSection />
-            <NotificationsSection />
-            <TimelineSection />
-            <LoginSection />
-            <SettingsSection />
-          </>
         )}
+      </nav>
 
-        {activeSection === "Wallet" && <WalletSection />}
-        {activeSection === "Notifications" && <NotificationsSection />}
-        {activeSection === "Event Timeline" && <TimelineSection />}
-        {activeSection === "Login Activity" && <LoginSection />}
-        {activeSection === "Account Settings" && <SettingsSection />}
-      </main>
-    </div>
+      <div className="min-h-screen bg-[#f9f4ef] flex flex-col md:flex-row">
+        {/* Sidebar */}
+        <aside className="w-full md:w-1/4 bg-white border-r border-[#e0c9a6] p-6">
+          <div className="text-center relative mb-8">
+            {userdata.photo ? (
+              <img
+                src={userdata.photo}
+                alt="User"
+                className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-[#f5e0c0]"
+              />
+            ) : (
+              <div className="w-24 h-24 rounded-full mx-auto bg-[#f5e0c0] text-[#8b1f1f] flex items-center justify-center text-3xl font-bold">
+                {userdata.name.charAt(0)}
+              </div>
+            )}
+
+            <h2 className="mt-4 text-xl font-semibold text-[#5e2c04]">
+              {userdata.name}
+            </h2>
+            <p className="text-sm text-[#946231]">{userdata.email}</p>
+            <p className="text-sm text-[#946231]">{userdata.phone}</p>
+
+            <button
+              onClick={() => navigate("/edit-dashboard")}
+              className="absolute border-2 rounded-2xl px-5 py-1 hover:bg-yellow-100 bg-yellow-50 text-sm mt-2 left-1/2 -translate-x-1/2"
+            >
+              ✏️ Edit Profile
+            </button>
+          </div>
+
+          <nav className="space-y-4 text-[#6b3b11] text-sm">
+            {sections.map((s) => (
+              <SidebarItem key={s} label={s} />
+            ))}
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-6 space-y-6">
+          {activeSection === "Dashboard" && (
+            <>
+              <WalletSection />
+              <NotificationsSection />
+              <TimelineSection />
+              <LoginSection />
+              <SettingsSection />
+            </>
+          )}
+          {activeSection === "Wallet" && <WalletSection />}
+          {activeSection === "Notifications" && <NotificationsSection />}
+          {activeSection === "Event Timeline" && <TimelineSection />}
+          {activeSection === "Login Activity" && <LoginSection />}
+          {activeSection === "Account Settings" && <SettingsSection />}
+        </main>
+      </div>
+    </>
   );
 };
 
