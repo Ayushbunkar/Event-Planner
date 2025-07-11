@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import api from "../config/api";
 import { toast } from "react-hot-toast";
 
 const Booknow = () => {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,9 +31,15 @@ const Booknow = () => {
 
     try {
       const res = await api.post("/auth/login", { email, password });
-      toast.success(res.data.message || "Login successful!");navigate('/userDashboard')
 
-    
+      toast.success(res.data.message || "Login successful!");
+
+      // ✅ Optional: Store token if your backend sends one
+      // localStorage.setItem("token", res.data.token);
+
+      // ✅ Redirect to Customer Dashboard
+      navigate("/dashboard");
+
       setFormData({ email: "", password: "" });
     } catch (error) {
       toast.error(
@@ -97,7 +103,10 @@ const Booknow = () => {
           </form>
           <div className="text-center mt-4">
             Don’t have an account?{" "}
-            <Link to="/register" className="text-pink-300 font-semibold hover:underline">
+            <Link
+              to="/register"
+              className="text-pink-300 font-semibold hover:underline"
+            >
               Register
             </Link>
           </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import api from "../config/api";
+import api from "../config/api"; 
 import { useNavigate } from "react-router-dom";
+import dashboardNavbarBg from "../assets/cover.jpg";
 
 const UserDashboard = () => {
   const [userdata, setUserData] = useState(null);
@@ -13,9 +14,8 @@ const UserDashboard = () => {
       const res = await api.get("/user/profile");
       const user = res.data.data;
 
-      // Cache busting for profile photo
       if (user.photo) {
-        user.photo = `${user.photo}?t=${Date.now()}`;
+        user.photo = `${user.photo}?t=${Date.now()}`; 
       }
 
       setUserData(user);
@@ -60,7 +60,7 @@ const UserDashboard = () => {
       <h3 className="text-lg font-semibold text-[#5e2c04] mb-1">
         Wallet Balance
       </h3>
-      <p className="text-2xl font-bold text-[#8b1f1f]">₹{userdata.wallet}</p>
+      <p className="text-2xl font-bold text-[#8b1f1f]">₹{userdata.wallet || 0}</p>
     </div>
   );
 
@@ -89,9 +89,9 @@ const UserDashboard = () => {
   const LoginSection = () => (
     <div className="bg-white rounded-xl shadow-md p-6 border border-[#e0c9a6]">
       <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">Login Activity</h3>
-      <p className="text-sm text-[#6b3b11]"><b>Last Login:</b> {userdata.lastLogin}</p>
-      <p className="text-sm text-[#6b3b11]"><b>IP:</b> {userdata.ip}</p>
-      <p className="text-sm text-[#6b3b11]"><b>Device:</b> {userdata.device}</p>
+      <p className="text-sm text-[#6b3b11]"><b>Last Login:</b> {userdata.lastLogin || "N/A"}</p>
+      <p className="text-sm text-[#6b3b11]"><b>IP:</b> {userdata.ip || "N/A"}</p>
+      <p className="text-sm text-[#6b3b11]"><b>Device:</b> {userdata.device || "N/A"}</p>
     </div>
   );
 
@@ -113,24 +113,31 @@ const UserDashboard = () => {
 
   return (
     <>
-      {/* Custom Navbar (Only for Dashboard) */}
-      <nav className="flex justify-between items-center px-6 py-4 bg-[#f5e0c0] shadow-sm border-b border-[#e0c9a6]">
-        <h1 className="text-xl font-semibold text-[#5e2c04]">User Dashboard</h1>
+      {/* Navbar */}
+      <nav
+        className="flex justify-between items-center px-6 py-4 shadow-sm border-b border-[#e0c9a6]"
+        style={{
+          backgroundImage: `url(${dashboardNavbarBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+     
         {userdata.photo ? (
           <img
             src={userdata.photo}
-            alt="Profile"
-            className="w-10 h-10 rounded-full border-2 border-[#8b1f1f]"
+            alt="User"
+            className="w-10 h-10 rounded-full object-cover border-2 border-white shadow"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-[#8b1f1f] text-white flex items-center justify-center text-lg font-bold">
+          <div className="w-10 h-10 rounded-full bg-white text-[#8b1f1f] flex items-center justify-center text-lg font-bold">
             {userdata.name?.charAt(0)}
           </div>
         )}
       </nav>
 
       <div className="min-h-screen bg-[#f9f4ef] flex flex-col md:flex-row">
-        {/* Sidebar */}
+        
         <aside className="w-full md:w-1/4 bg-white border-r border-[#e0c9a6] p-6">
           <div className="text-center relative mb-8">
             {userdata.photo ? (
@@ -141,16 +148,14 @@ const UserDashboard = () => {
               />
             ) : (
               <div className="w-24 h-24 rounded-full mx-auto bg-[#f5e0c0] text-[#8b1f1f] flex items-center justify-center text-3xl font-bold">
-                {userdata.name.charAt(0)}
+                {userdata.name?.charAt(0)}
               </div>
             )}
-
             <h2 className="mt-4 text-xl font-semibold text-[#5e2c04]">
               {userdata.name}
             </h2>
             <p className="text-sm text-[#946231]">{userdata.email}</p>
             <p className="text-sm text-[#946231]">{userdata.phone}</p>
-
             <button
               onClick={() => navigate("/edit-dashboard")}
               className="absolute border-2 rounded-2xl px-5 py-1 hover:bg-yellow-100 bg-yellow-50 text-sm mt-2 left-1/2 -translate-x-1/2"
@@ -159,7 +164,7 @@ const UserDashboard = () => {
             </button>
           </div>
 
-          <nav className="space-y-4 text-[#6b3b11] text-sm">
+          <nav className="space-y-4 mt-4 text-[#6b3b11] text-sm">
             {sections.map((s) => (
               <SidebarItem key={s} label={s} />
             ))}

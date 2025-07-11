@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-// Components
+
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -13,7 +13,9 @@ import Contact from "./components/Contact";
 import Booknow from "./components/Booknow";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
-import UserDashboardedit from "./components/UserDashboardedit"; 
+import UserDashboardEdit from "./components/UserDashboardEdit";
+import CustomerDashboard from "./pages/CustomerDashboard";
+
 
 const App = () => {
   return (
@@ -33,7 +35,9 @@ const App = () => {
           <Route path="/booknow" element={<Booknow />} />
           <Route path="/register" element={<Register />} />
           <Route path="/userDashboard" element={<UserDashboard />} />
-          <Route path="/edit-dashboard" element={<UserDashboardedit />} />
+         <Route path="/userDashboardEdit" element={<UserDashboardEdit />} />
+           <Route path="/dashboard" element={<CustomerDashboard />} />
+
           
           {/* Optional 404 Page */}
           <Route

@@ -1,28 +1,19 @@
 // routes/userRoutes.js
-
 import express from "express";
 import { GetProfile, UpdateProfile } from "../controllers/userController.js";
 import { Protect } from "../middlewares/authMiddleware.js";
 import multer from "multer";
 
-// Configure Multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Make sure this folder exists
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage });
+// Temp file storage (used before uploading to Cloudinary)
+const upload = multer({ dest: "temp_uploads/" });
 
 const router = express.Router();
 
-// GET user profile (protected)
+// GET user profile (requires login)
 router.get("/profile", Protect, GetProfile);
 
-// PUT update user profile (protected)
-router.put("/update", Protect, upload.single("picture"), UpdateProfile);
+// PUT update profile with optional photo (multipart/form-data)
+router.put("/profile", Protect, upload.single("photo"), UpdateProfile);
+
 
 export default router;
