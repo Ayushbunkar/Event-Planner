@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import api from "../config/api"; 
+import api from "../config/api"; // ✅ Correct relative path
 import { useNavigate } from "react-router-dom";
 import dashboardNavbarBg from "../assets/cover.jpg";
 
@@ -15,14 +15,14 @@ const UserDashboard = () => {
       const user = res.data.data;
 
       if (user.photo) {
-        user.photo = `${user.photo}?t=${Date.now()}`; 
+        user.photo = `${user.photo}?t=${Date.now()}`; // Cache busting
       }
 
       setUserData(user);
       toast.success(res.data.message);
     } catch (error) {
       toast.error(
-        `Error : ${error.response?.status || error.message} | ${
+        `Error: ${error.response?.status || error.message} | ${
           error.response?.data.message || ""
         }`
       );
@@ -60,13 +60,17 @@ const UserDashboard = () => {
       <h3 className="text-lg font-semibold text-[#5e2c04] mb-1">
         Wallet Balance
       </h3>
-      <p className="text-2xl font-bold text-[#8b1f1f]">₹{userdata.wallet || 0}</p>
+      <p className="text-2xl font-bold text-[#8b1f1f]">
+        ₹{userdata.wallet || 0}
+      </p>
     </div>
   );
 
   const NotificationsSection = () => (
     <div className="bg-white rounded-xl shadow-md p-6 border border-[#e0c9a6]">
-      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">Notifications</h3>
+      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">
+        Notifications
+      </h3>
       <ul className="space-y-2 text-sm text-[#6b3b11] list-disc list-inside">
         <li>New message from planner</li>
         <li>Payment reminder for catering</li>
@@ -88,16 +92,26 @@ const UserDashboard = () => {
 
   const LoginSection = () => (
     <div className="bg-white rounded-xl shadow-md p-6 border border-[#e0c9a6]">
-      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">Login Activity</h3>
-      <p className="text-sm text-[#6b3b11]"><b>Last Login:</b> {userdata.lastLogin || "N/A"}</p>
-      <p className="text-sm text-[#6b3b11]"><b>IP:</b> {userdata.ip || "N/A"}</p>
-      <p className="text-sm text-[#6b3b11]"><b>Device:</b> {userdata.device || "N/A"}</p>
+      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">
+        Login Activity
+      </h3>
+      <p className="text-sm text-[#6b3b11]">
+        <b>Last Login:</b> {userdata.lastLogin || "N/A"}
+      </p>
+      <p className="text-sm text-[#6b3b11]">
+        <b>IP:</b> {userdata.ip || "N/A"}
+      </p>
+      <p className="text-sm text-[#6b3b11]">
+        <b>Device:</b> {userdata.device || "N/A"}
+      </p>
     </div>
   );
 
   const SettingsSection = () => (
     <div className="bg-white rounded-xl shadow-md p-6 border border-[#e0c9a6]">
-      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">Account Settings</h3>
+      <h3 className="text-lg font-semibold text-[#5e2c04] mb-4">
+        Account Settings
+      </h3>
       <div className="flex flex-col sm:flex-row gap-4">
         <button className="bg-[#8b1f1f] text-white text-sm px-4 py-2 rounded-md hover:bg-[#a83232]">
           Logout
@@ -122,7 +136,9 @@ const UserDashboard = () => {
           backgroundPosition: "center",
         }}
       >
-     
+        <h1 className="text-white text-lg font-bold drop-shadow-md">
+          User Dashboard
+        </h1>
         {userdata.photo ? (
           <img
             src={userdata.photo}
@@ -137,7 +153,7 @@ const UserDashboard = () => {
       </nav>
 
       <div className="min-h-screen bg-[#f9f4ef] flex flex-col md:flex-row">
-        
+        {/* Sidebar */}
         <aside className="w-full md:w-1/4 bg-white border-r border-[#e0c9a6] p-6">
           <div className="text-center relative mb-8">
             {userdata.photo ? (

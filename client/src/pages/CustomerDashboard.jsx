@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Sidebar from "./components/Customer/Sidebar";
-import Overview from "./components/Customer/Overview";
-import Profile from "./components/Customer/Profile";
-import Bookings from "./components/Customer/Bookings";
-import Support from "./components/Customer/Support";
-import Feedback from "./components/Customer/Feedback";
+import Sidebar from "../components/customer/Sidebar";
+import Overview from "../components/customer/Overview";
+import Profile from "../components/customer/Profile";
+import Bookings from "../components/customer/Bookings";
+import Support from "../components/customer/Support";
+import Feedback from "../components/customer/Feedback";
 
 const CustomerDashboard = () => {
   const [active, setActive] = useState("overview");

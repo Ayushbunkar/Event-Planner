@@ -69,3 +69,69 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-hot-toast";
+// import api from "../../config/api"; 
+
+// const Profile = () => {
+//   const [userdata, setUserData] = useState(null);
+//   const navigate = useNavigate();
+
+//   const fetchUserData = async () => {
+//     try {
+//       const res = await api.get("/user/profile");
+//       const user = res.data.data;
+
+//       if (user.photo) {
+//         user.photo = `${user.photo}?t=${Date.now()}`;
+//       }
+
+//       setUserData(user);
+//     } catch (error) {
+//       toast.error(
+//         `Error: ${error.response?.status || error.message} | ${
+//           error.response?.data.message || ""
+//         }`
+//       );
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchUserData();
+//   }, []);
+
+//   if (!userdata) return <div className="p-10">Loading...</div>;
+
+//   return (
+//     <div className="min-h-screen bg-[#f9f4ef] flex justify-center items-center px-4">
+//       <div className="bg-white max-w-lg w-full rounded-lg shadow-md border border-[#e0c9a6] p-6 text-center">
+//         {userdata.photo ? (
+//           <img
+//             src={userdata.photo}
+//             alt="User"
+//             className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-[#f5e0c0]"
+//           />
+//         ) : (
+//           <div className="w-28 h-28 rounded-full mx-auto bg-[#f5e0c0] text-[#8b1f1f] flex items-center justify-center text-4xl font-bold">
+//             {userdata.name?.charAt(0)}
+//           </div>
+//         )}
+
+//         <h2 className="mt-4 text-2xl font-semibold text-[#5e2c04]">{userdata.name}</h2>
+//         <p className="text-[#946231] text-sm">{userdata.email}</p>
+//         <p className="text-[#946231] text-sm">{userdata.phone}</p>
+
+//         <button
+//           onClick={() => navigate("/edit-dashboard")}
+//           className="mt-6 px-6 py-2 bg-yellow-50 hover:bg-yellow-100 text-[#8b1f1f] border-2 border-yellow-200 rounded-full"
+//         >
+//           ✏️ Edit Profile
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Profile;
