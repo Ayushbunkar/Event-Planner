@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import api from "../config/api"; // ✅ Correct relative path
+import api from "../config/api"; 
 import { useNavigate } from "react-router-dom";
 import dashboardNavbarBg from "../assets/cover.jpg";
 
@@ -15,7 +15,7 @@ const UserDashboard = () => {
       const user = res.data.data;
 
       if (user.photo) {
-        user.photo = `${user.photo}?t=${Date.now()}`; // Cache busting
+        user.photo = `${user.photo}?t=${Date.now()}`;           
       }
 
       setUserData(user);
