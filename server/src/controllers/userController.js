@@ -1,41 +1,80 @@
+// controllers/userController.js
 import User from "../models/userModels.js";
-import cloudinary from "../config/cloudinary.js";
-import fs from "fs";
+import cloudinary from "cloudinary";
 
-// GET user profile
 export const GetProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
-    if (!currentUser) return res.status(401).json({ message: "User not found." });
+    if (!currentUser) {
+      const error = new Error("User Not Found !! Login Again");
+      error.statusCode = 401;
+      return next(error);
+    }
 
     res.status(200).json({
-      message: `Welcome back, ${currentUser.name}`,
+      message: `Welcome back ${currentUser.name}`,
       data: currentUser,
     });
   } catch (error) {
     next(error);
   }
 };
+
 export const UpdateProfile = async (req, res, next) => {
   try {
-    console.log("REQ BODY:", req.body);
-    console.log("REQ FILE:", req.file);
     const currentUser = req.user;
-    if (!currentUser) return res.status(401).json({ message: "Unauthorized" });
-
-    // ... update fields
-
-    if (req.file) {
-      console.log("Uploading to Cloudinary:", req.file.path);
-      const result = await cloudinary.uploader.upload(req.file.path, { folder: "user-profiles" });
-      currentUser.photo = result.secure_url;
-      fs.unlinkSync(req.file.path);
+    if (!currentUser) {
+      const error = new Error("User Not Found !! Login Again");
+      error.statusCode = 401;
+      return next(error);
     }
 
-    const saved = await currentUser.save();
-    return res.status(200).json({ message: "Profile updated", data: saved });
+    const {
+      name,
+      gender,
+      occupation,
+      address,
+      city,
+      district,
+      state,
+      representing,
+      phone
+    } = req.body;
+
+    const file = req.file;
+    let photoUrl = currentUser.photo;
+
+    if (file) {
+      const b64 = Buffer.from(file.buffer).toString("base64");
+      const dataURI = `data:${file.mimetype};base64,${b64}`;
+      const result = await cloudinary.v2.uploader.upload(dataURI, {
+        folder: "eventPlannerPictures",
+        width: 500,
+        height: 500,
+        crop: "fill",
+      });
+      photoUrl = result.secure_url;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      currentUser._id,
+      {
+        name,
+        gender,
+        occupation,
+        address,
+        city,
+        district,
+        state,
+        representing,
+        phone,
+        photo: photoUrl,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Profile Updated", data: updatedUser });
   } catch (error) {
-    console.error("❌ UpdateProfile crashed:", error);
-    return res.status(500).json({ message: "Server error while updating profile.", details: error.message });
+    next(error);
   }
 };
