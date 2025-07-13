@@ -3,10 +3,12 @@ import { toast } from "react-hot-toast";
 import api from "../../config/api";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import ProfileEditModal from "./profileEditModal";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [userdata, setUserData] = useState("");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const fetchUserData = async () => {
     try {
@@ -28,110 +30,104 @@ const Profile = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center bg-gray-100">
-        <h1 className="text-2xl font-bold">User Dashboard</h1>
-        <p className="text-gray-600">Welcome to your dashboard!</p>
-      </div>
+      <section className="bg-gradient-to-b from-[#fff7ef] to-[#fdeada] min-h-screen py-16 px-4 font-serif relative">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h1 className="text-5xl font-extrabold text-[#7a1d1d] mb-3 tracking-wide">
+            Welcome, {userdata.fullName?.split(" ")[0]}
+          </h1>
+          <p className="text-[#6b3b16] text-lg italic">
+            A graceful glance at your profile.
+          </p>
+        </div>
 
-      <div className="bg-white relative mx-auto my-5 w-[50%] border p-6 rounded-lg shadow-md flex justify-center gap-20 items-center">
-        <div className="">
-          <div className="w-50 h-50 rounded-full">
-            <img
-              src={userdata.photo}
-              alt=""
-              className="w-50 h-50 rounded-full object-cover"
-            />
+        <div>
+          <div className="bg-white border border-[#d6b78f] rounded-3xl shadow-2xl p-10 max-w-4xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10 transition-all duration-500 ease-in-out hover:shadow-[0_10px_50px_rgba(0,0,0,0.1)]">
+            {/* Info Section */}
+            <div className="flex-1 text-[#5e2c04] space-y-4 text-lg w-full">
+              <div>
+                <span className="font-semibold text-[#a3542d]">Name:</span>{" "}
+                {userdata.name}
+              </div>
+              <div>
+                <span className="font-semibold text-[#a3542d]">Email:</span>{" "}
+                {userdata.email}
+              </div>
+              <div>
+                <span className="font-semibold text-[#a3542d]">Phone:</span>{" "}
+                {userdata.phone}
+              </div>
+            </div>
+
+            {/* Image Section */}
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#c49b63] shadow-md">
+              <img
+                src={userdata.photo}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div>
           </div>
-          
+
+          {/*  Additional Info Section */}
+          <div className="bg-white border border-[#e8d4bb] rounded-2xl shadow-2xl p-8 max-w-4xl mx-auto mt-8 text-[#5e2c04]">
+            <h2 className="text-2xl font-bold mb-4 text-[#7a1d1d]">
+              Additional Information
+            </h2>
+            <div className="space-y-3 text-md">
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">Gender:</b>
+                <span className="text-[#7a1d1d] ml-2">{userdata.gender}</span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">Occupation:</b>
+                <span className="text-[#7a1d1d] ml-2">
+                  {userdata.occupation}
+                </span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">Address:</b>
+                <span className="text-[#7a1d1d] ml-2">{userdata.address}</span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">City:</b>
+                <span className="text-[#7a1d1d] ml-2">{userdata.city}</span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">District:</b>
+                <span className="text-[#7a1d1d] ml-2">{userdata.district}</span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">State:</b>
+                <span className="text-[#7a1d1d] ml-2">{userdata.state}</span>
+              </div>
+              <div className="text-[#5e2c04]">
+                <b className="text-[#a3542d]">Representing:</b>
+                <span className="text-[#7a1d1d] ml-2">
+                  {userdata.representing}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setIsEditModalOpen(true)}
+            className="absolute top-5 right-5 bg-[#f5cbaa] hover:bg-[#7a1d1d] text-[#492609] hover:text-[#f0b96d] font-semibold px-5 py-2 rounded-full flex items-center gap-2  "
+          >
+            <CiEdit className="text-xl"/>
+            Edit
+          </button>
         </div>
-        <div className="grid justify-around gap-5">
-          <h3>
-            <b>Name :</b> {userdata.fullName}
-          </h3>
-          <h3>
-            <b>Email :</b> {userdata.email}
-          </h3>
-          <h3>
-            <b>Phone :</b> {userdata.phone}
-          </h3>
-        </div>
-        <button
-          className="absolute top-1 right-1 border p-2 rounded-lg flex gap-2 justify-center items-center bg-rose-300 hover:bg-rose-400 text-lg"
-          onClick={() => navigate("/userDashboardEdit")}
-        >
-          {" "}
-          <CiEdit />
-          Edit
-        </button>
-      </div>
+      </section>
+
+      <ProfileEditModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+        }}
+        oldData={userdata}
+      />
     </>
   );
 };
 
 export default Profile;
-
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { toast } from "react-hot-toast";
-// import api from "../../config/api"; 
-
-// const Profile = () => {
-//   const [userdata, setUserData] = useState(null);
-//   const navigate = useNavigate();
-
-//   const fetchUserData = async () => {
-//     try {
-//       const res = await api.get("/user/profile");
-//       const user = res.data.data;
-
-//       if (user.photo) {
-//         user.photo = `${user.photo}?t=${Date.now()}`;
-//       }
-
-//       setUserData(user);
-//     } catch (error) {
-//       toast.error(
-//         `Error: ${error.response?.status || error.message} | ${
-//           error.response?.data.message || ""
-//         }`
-//       );
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchUserData();
-//   }, []);
-
-//   if (!userdata) return <div className="p-10">Loading...</div>;
-
-//   return (
-//     <div className="min-h-screen bg-[#f9f4ef] flex justify-center items-center px-4">
-//       <div className="bg-white max-w-lg w-full rounded-lg shadow-md border border-[#e0c9a6] p-6 text-center">
-//         {userdata.photo ? (
-//           <img
-//             src={userdata.photo}
-//             alt="User"
-//             className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-[#f5e0c0]"
-//           />
-//         ) : (
-//           <div className="w-28 h-28 rounded-full mx-auto bg-[#f5e0c0] text-[#8b1f1f] flex items-center justify-center text-4xl font-bold">
-//             {userdata.name?.charAt(0)}
-//           </div>
-//         )}
-
-//         <h2 className="mt-4 text-2xl font-semibold text-[#5e2c04]">{userdata.name}</h2>
-//         <p className="text-[#946231] text-sm">{userdata.email}</p>
-//         <p className="text-[#946231] text-sm">{userdata.phone}</p>
-
-//         <button
-//           onClick={() => navigate("/edit-dashboard")}
-//           className="mt-6 px-6 py-2 bg-yellow-50 hover:bg-yellow-100 text-[#8b1f1f] border-2 border-yellow-200 rounded-full"
-//         >
-//           ✏️ Edit Profile
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
