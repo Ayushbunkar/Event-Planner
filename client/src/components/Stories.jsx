@@ -78,7 +78,7 @@ const Stories = () => {
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Couple Stories 💕</h2>
           <div className="grid md:grid-cols-3 gap-8">
              <div className="bg-pink-50 p-6 rounded-xl shadow hover:shadow-lg transition">
-              <h3 className="text-xl font-bold text-pink-700 mb-2">Karan & Aarti</h3>
+              <h3 className="text-xl font-bold text-pink-700 mb-2">Shreyash & Soumya</h3>
               <p className="text-gray-600 text-sm">
                 “You turned what we thought would be stressful into something beautiful and unforgettable. We’re beyond thankful”
               </p>
