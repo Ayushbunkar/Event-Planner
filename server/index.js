@@ -1,6 +1,8 @@
 // index.js
 import express from "express";
 import dotenv from "dotenv";
+
+dotenv.config();
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
@@ -11,7 +13,6 @@ import userRouter from "./src/routes/userRoutes.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
-dotenv.config();
 
 // Enable __dirname with ES modules
 const __filename = fileURLToPath(import.meta.url);

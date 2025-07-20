@@ -1,12 +1,17 @@
-// controllers/userController.js
 import User from "../models/userModels.js";
 import cloudinary from "cloudinary";
 
-// GET PROFILE
+// ✅ Cloudinary Configuration (make sure .env is loaded before this)
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// ✅ GET /user/profile
 export const GetProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
-
     if (!currentUser) {
       return res.status(401).json({ message: "User not found. Please login again." });
     }
@@ -16,15 +21,15 @@ export const GetProfile = async (req, res, next) => {
       data: currentUser,
     });
   } catch (error) {
+    console.error("❌ GetProfile Error:", error.message);
     next(error);
   }
 };
 
-// UPDATE PROFILE
+// ✅ PUT /user/profile
 export const UpdateProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
-
     if (!currentUser) {
       return res.status(401).json({ message: "User not found. Please login again." });
     }
@@ -43,9 +48,10 @@ export const UpdateProfile = async (req, res, next) => {
 
     let photoUrl = currentUser.photo;
 
+    // ✅ If new photo uploaded, send to Cloudinary
     if (req.file) {
-      const b64 = Buffer.from(req.file.buffer).toString("base64");
-      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+      const base64 = Buffer.from(req.file.buffer).toString("base64");
+      const dataURI = `data:${req.file.mimetype};base64,${base64}`;
 
       const uploadResult = await cloudinary.v2.uploader.upload(dataURI, {
         folder: "eventPlannerPictures",
@@ -57,6 +63,7 @@ export const UpdateProfile = async (req, res, next) => {
       photoUrl = uploadResult.secure_url;
     }
 
+    // ✅ Update user data
     const updatedUser = await User.findByIdAndUpdate(
       currentUser._id,
       {
@@ -71,7 +78,7 @@ export const UpdateProfile = async (req, res, next) => {
         phone,
         photo: photoUrl,
       },
-      { new: true } // returns updated doc
+      { new: true }
     );
 
     res.status(200).json({
@@ -79,6 +86,7 @@ export const UpdateProfile = async (req, res, next) => {
       data: updatedUser,
     });
   } catch (error) {
-    next(error);
+    console.error("❌ UpdateProfile Error:", error.message);
+    res.status(500).json({ message: error.message || "Internal Server Error" });
   }
 };

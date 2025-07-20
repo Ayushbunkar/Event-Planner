@@ -53,31 +53,26 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
     }
   }, [selectedState]);
 
-  const handleSaveClick = async () => {
-    const formData = new FormData();
-    Object.entries(userdata).forEach(([key, value]) => {
-      if (value) formData.append(key, value);
-    });
-    if (photoFile) formData.append("photoFile", photoFile);
+ const handleSaveClick = async () => {
+  const formData = new FormData();
+  Object.entries(userdata).forEach(([key, value]) => formData.append(key, value));
+  if (photoFile) formData.append("photo", photoFile); // must be "photo"
 
-    try {
-      const res = await axios.put(
-        "http://localhost:4500/user/profile", // ✅ Your API endpoint
-        formData,
-        {
-          withCredentials: true, // ✅ Needed if using cookies/JWT
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        }
-      );
-      onSave(res.data.data); // ✅ Pass updated user back
-      onClose(); // ✅ Close modal
-    } catch (err) {
-      console.error("Save failed", err);
-      alert("Save failed: " + (err.response?.data?.message || err.message));
-    }
-  };
+  try {
+    const res = await axios.put("http://localhost:4500/user/profile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        withCredentials: true,
+      },
+    });
+    onSave(res.data.data);
+    onClose();
+  } catch (err) {
+    console.error("Save failed", err);
+    alert("Save failed: " + err.message);
+  }
+};
+
 
   return (
     <AnimatePresence>

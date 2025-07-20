@@ -6,14 +6,14 @@ import { Protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// ✅ Use multer memory storage (no afal file saving)
+// ✅ Use multer memory storage (for cloudinary upload)
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// ✅ GET user profile
+// ✅ GET /user/profile
 router.get("/profile", Protect, GetProfile);
 
-// ✅ PUT update profile (multipart/form-data)
+// ✅ PUT /user/profile
 router.put("/profile", Protect, upload.single("photoFile"), UpdateProfile);
 
 export default router;
