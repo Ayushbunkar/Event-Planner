@@ -59,12 +59,13 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
   if (photoFile) formData.append("photo", photoFile); // must be "photo"
 
   try {
-    const res = await axios.put("http://localhost:4500/user/profile", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        withCredentials: true,
-      },
-    });
+   const res = await axios.put("/api/user/profile", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data"
+  },
+  withCredentials: true // ✅ sends your JWT cookie
+});
+
     onSave(res.data.data);
     onClose();
   } catch (err) {

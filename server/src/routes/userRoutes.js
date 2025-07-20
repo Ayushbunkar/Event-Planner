@@ -14,6 +14,6 @@ const upload = multer({ storage });
 router.get("/profile", Protect, GetProfile);
 
 // ✅ PUT /user/profile
-router.put("/profile", Protect, upload.single("photoFile"), UpdateProfile);
+router.put("/profile", Protect, upload.single("photo"), UpdateProfile);
 
 export default router;
