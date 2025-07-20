@@ -6,39 +6,39 @@ import axios from "axios";
 const indianStatesWithCities = {
   "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore"],
   "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat"],
-  "Assam": ["Guwahati", "Silchar", "Dibrugarh"],
-  "Bihar": ["Patna", "Gaya", "Muzaffarpur"],
-  "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur"],
-  "Goa": ["Panaji", "Margao", "Vasco da Gama"],
-  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
-  "Haryana": ["Faridabad", "Gurugram", "Panipat", "Ambala"],
+  Assam: ["Guwahati", "Silchar", "Dibrugarh"],
+  Bihar: ["Patna", "Gaya", "Muzaffarpur"],
+  Chhattisgarh: ["Raipur", "Bhilai", "Bilaspur"],
+  Goa: ["Panaji", "Margao", "Vasco da Gama"],
+  Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+  Haryana: ["Faridabad", "Gurugram", "Panipat", "Ambala"],
   "Himachal Pradesh": ["Shimla", "Dharamshala", "Mandi"],
-  "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad"],
-  "Karnataka": ["Bengaluru", "Mysore", "Mangalore", "Hubli"],
-  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+  Jharkhand: ["Ranchi", "Jamshedpur", "Dhanbad"],
+  Karnataka: ["Bengaluru", "Mysore", "Mangalore", "Hubli"],
+  Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode"],
   "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior", "Jabalpur"],
-  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"],
-  "Manipur": ["Imphal", "Thoubal", "Bishnupur"],
-  "Meghalaya": ["Shillong", "Tura", "Nongpoh"],
-  "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
-  "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
-  "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Puri"],
-  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
-  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota"],
-  "Sikkim": ["Gangtok", "Namchi", "Mangan"],
+  Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik"],
+  Manipur: ["Imphal", "Thoubal", "Bishnupur"],
+  Meghalaya: ["Shillong", "Tura", "Nongpoh"],
+  Mizoram: ["Aizawl", "Lunglei", "Champhai"],
+  Nagaland: ["Kohima", "Dimapur", "Mokokchung"],
+  Odisha: ["Bhubaneswar", "Cuttack", "Rourkela", "Puri"],
+  Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
+  Rajasthan: ["Jaipur", "Jodhpur", "Udaipur", "Kota"],
+  Sikkim: ["Gangtok", "Namchi", "Mangan"],
   "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirapalli"],
-  "Telangana": ["Hyderabad", "Warangal", "Nizamabad"],
-  "Tripura": ["Agartala", "Dharmanagar", "Udaipur"],
+  Telangana: ["Hyderabad", "Warangal", "Nizamabad"],
+  Tripura: ["Agartala", "Dharmanagar", "Udaipur"],
   "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi"],
-  "Uttarakhand": ["Dehradun", "Haridwar", "Haldwani"],
+  Uttarakhand: ["Dehradun", "Haridwar", "Haldwani"],
   "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol"],
-  "Delhi": ["New Delhi", "Dwarka", "Rohini"],
+  Delhi: ["New Delhi", "Dwarka", "Rohini"],
   "Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag"],
-  "Ladakh": ["Leh", "Kargil"],
-  "Puducherry": ["Puducherry", "Karaikal", "Yanam"],
-  "Chandigarh": ["Chandigarh"],
+  Ladakh: ["Leh", "Kargil"],
+  Puducherry: ["Puducherry", "Karaikal", "Yanam"],
+  Chandigarh: ["Chandigarh"],
   "Andaman and Nicobar Islands": ["Port Blair"],
-  "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa"]
+  "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa"],
 };
 
 const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
@@ -53,27 +53,32 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
     }
   }, [selectedState]);
 
- const handleSaveClick = async () => {
-  const formData = new FormData();
-  Object.entries(userdata).forEach(([key, value]) => formData.append(key, value));
-  if (photoFile) formData.append("photo", photoFile); // must be "photo"
+  const handleSaveClick = async () => {
+    const formData = new FormData();
+    Object.entries(userdata).forEach(([key, value]) =>
+      formData.append(key, value)
+    );
+    if (photoFile) formData.append("photo", photoFile); // must be "photo"
 
-  try {
-   const res = await axios.put("/api/user/profile", formData, {
-  headers: {
-    "Content-Type": "multipart/form-data"
-  },
-  withCredentials: true // ✅ sends your JWT cookie
-});
+    try {
+      const res = await axios.put(
+        "http://localhost:4500/user/profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true, // <--- Important
+        }
+      );
 
-    onSave(res.data.data);
-    onClose();
-  } catch (err) {
-    console.error("Save failed", err);
-    alert("Save failed: " + err.message);
-  }
-};
-
+      onSave(res.data.data);
+      onClose();
+    } catch (err) {
+      console.error("Save failed", err);
+      alert("Save failed: " + err.message);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -102,30 +107,43 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
               {/* Common fields */}
               {[
                 { label: "Name", key: "name" },
-                { label: "Gender", key: "gender", type: "select", options: ["Male", "Female", "Other"] },
+                {
+                  label: "Gender",
+                  key: "gender",
+                  type: "select",
+                  options: ["Male", "Female", "Other"],
+                },
                 { label: "Occupation", key: "occupation" },
                 { label: "Address", key: "address" },
                 { label: "Representing", key: "representing" },
-                { label: "District", key: "district" }
+                { label: "District", key: "district" },
               ].map(({ label, key, type = "input", options = [] }) => (
                 <div key={key}>
-                  <label className="block mb-1 text-[#7a1d1d] font-semibold">{label}</label>
+                  <label className="block mb-1 text-[#7a1d1d] font-semibold">
+                    {label}
+                  </label>
                   {type === "select" ? (
                     <select
                       value={userdata[key] || ""}
-                      onChange={(e) => setUserData({ ...userdata, [key]: e.target.value })}
+                      onChange={(e) =>
+                        setUserData({ ...userdata, [key]: e.target.value })
+                      }
                       className="w-full border border-[#e5b17a] p-2 rounded-lg"
                     >
                       <option value="">-- Select --</option>
                       {options.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
                       ))}
                     </select>
                   ) : (
                     <input
                       type="text"
                       value={userdata[key] || ""}
-                      onChange={(e) => setUserData({ ...userdata, [key]: e.target.value })}
+                      onChange={(e) =>
+                        setUserData({ ...userdata, [key]: e.target.value })
+                      }
                       className="w-full border border-[#e5b17a] p-2 rounded-lg"
                     />
                   )}
@@ -134,40 +152,56 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
 
               {/* State dropdown */}
               <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">State</label>
+                <label className="block mb-1 text-[#7a1d1d] font-semibold">
+                  State
+                </label>
                 <select
                   value={selectedState}
                   onChange={(e) => {
                     setSelectedState(e.target.value);
-                    setUserData({ ...userdata, state: e.target.value, city: "" });
+                    setUserData({
+                      ...userdata,
+                      state: e.target.value,
+                      city: "",
+                    });
                   }}
                   className="w-full border border-[#e5b17a] p-2 rounded-lg"
                 >
                   <option value="">-- Select State --</option>
                   {Object.keys(indianStatesWithCities).map((state) => (
-                    <option key={state} value={state}>{state}</option>
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
                   ))}
                 </select>
               </div>
 
               {/* City dropdown */}
               <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">City</label>
+                <label className="block mb-1 text-[#7a1d1d] font-semibold">
+                  City
+                </label>
                 <select
                   value={userdata.city || ""}
-                  onChange={(e) => setUserData({ ...userdata, city: e.target.value })}
+                  onChange={(e) =>
+                    setUserData({ ...userdata, city: e.target.value })
+                  }
                   className="w-full border border-[#e5b17a] p-2 rounded-lg"
                 >
                   <option value="">-- Select City --</option>
                   {cities.map((city) => (
-                    <option key={city} value={city}>{city}</option>
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
                   ))}
                 </select>
               </div>
 
               {/* Upload photo */}
               <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">Upload Photo</label>
+                <label className="block mb-1 text-[#7a1d1d] font-semibold">
+                  Upload Photo
+                </label>
                 <input
                   type="file"
                   accept="image/*"
