@@ -6,7 +6,7 @@ import { Protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// ✅ Use multer memory storage (no local file saving)
+// ✅ Use multer memory storage (no afal file saving)
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
