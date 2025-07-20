@@ -55,20 +55,27 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
 
   const handleSaveClick = async () => {
     const formData = new FormData();
-    Object.entries(userdata).forEach(([key, value]) => formData.append(key, value));
+    Object.entries(userdata).forEach(([key, value]) => {
+      if (value) formData.append(key, value);
+    });
     if (photoFile) formData.append("photoFile", photoFile);
 
     try {
-      const res = await axios.put("/api/user/profile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
+      const res = await axios.put(
+        "http://localhost:4500/user/profile", // ✅ Your API endpoint
+        formData,
+        {
+          withCredentials: true, // ✅ Needed if using cookies/JWT
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         }
-      });
-      onSave(res.data);
-      onClose();
+      );
+      onSave(res.data.data); // ✅ Pass updated user back
+      onClose(); // ✅ Close modal
     } catch (err) {
       console.error("Save failed", err);
-      alert("Save failed: " + err.message);
+      alert("Save failed: " + (err.response?.data?.message || err.message));
     }
   };
 
@@ -96,44 +103,50 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
             </div>
 
             <div className="p-6 grid grid-cols-1 gap-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
-              <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">Name</label>
-                <input type="text" value={userdata.name || ""} onChange={(e) => setUserData({ ...userdata, name: e.target.value })} className="w-full border border-[#e5b17a] p-2 rounded-lg" />
-              </div>
-
-              <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">Gender</label>
-                <select value={userdata.gender || ""} onChange={(e) => setUserData({ ...userdata, gender: e.target.value })} className="w-full border border-[#e5b17a] p-2 rounded-lg">
-                  <option value="">-- Select Gender --</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              {["occupation", "address", "representing"].map((key) => (
+              {/* Common fields */}
+              {[
+                { label: "Name", key: "name" },
+                { label: "Gender", key: "gender", type: "select", options: ["Male", "Female", "Other"] },
+                { label: "Occupation", key: "occupation" },
+                { label: "Address", key: "address" },
+                { label: "Representing", key: "representing" },
+                { label: "District", key: "district" }
+              ].map(({ label, key, type = "input", options = [] }) => (
                 <div key={key}>
-                  <label className="block mb-1 text-[#7a1d1d] font-semibold capitalize">{key}</label>
-                  <input type="text" value={userdata[key] || ""} onChange={(e) => setUserData({ ...userdata, [key]: e.target.value })} className="w-full border border-[#e5b17a] p-2 rounded-lg" />
+                  <label className="block mb-1 text-[#7a1d1d] font-semibold">{label}</label>
+                  {type === "select" ? (
+                    <select
+                      value={userdata[key] || ""}
+                      onChange={(e) => setUserData({ ...userdata, [key]: e.target.value })}
+                      className="w-full border border-[#e5b17a] p-2 rounded-lg"
+                    >
+                      <option value="">-- Select --</option>
+                      {options.map((opt) => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      value={userdata[key] || ""}
+                      onChange={(e) => setUserData({ ...userdata, [key]: e.target.value })}
+                      className="w-full border border-[#e5b17a] p-2 rounded-lg"
+                    />
+                  )}
                 </div>
               ))}
 
-              <div>
-                <label className="block mb-1 text-[#7a1d1d] font-semibold">District</label>
-                <select value={userdata.district || ""} onChange={(e) => setUserData({ ...userdata, district: e.target.value })} className="w-full border border-[#e5b17a] p-2 rounded-lg">
-                  <option value="">-- Select District --</option>
-                  {["District A", "District B", "District C"].map((dist) => (
-                    <option key={dist} value={dist}>{dist}</option>
-                  ))}
-                </select>
-              </div>
-
+              {/* State dropdown */}
               <div>
                 <label className="block mb-1 text-[#7a1d1d] font-semibold">State</label>
-                <select value={selectedState} onChange={(e) => {
-                  setSelectedState(e.target.value);
-                  setUserData({ ...userdata, state: e.target.value, city: "" });
-                }} className="w-full border border-[#e5b17a] p-2 rounded-lg">
+                <select
+                  value={selectedState}
+                  onChange={(e) => {
+                    setSelectedState(e.target.value);
+                    setUserData({ ...userdata, state: e.target.value, city: "" });
+                  }}
+                  className="w-full border border-[#e5b17a] p-2 rounded-lg"
+                >
                   <option value="">-- Select State --</option>
                   {Object.keys(indianStatesWithCities).map((state) => (
                     <option key={state} value={state}>{state}</option>
@@ -141,9 +154,14 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
                 </select>
               </div>
 
+              {/* City dropdown */}
               <div>
                 <label className="block mb-1 text-[#7a1d1d] font-semibold">City</label>
-                <select value={userdata.city || ""} onChange={(e) => setUserData({ ...userdata, city: e.target.value })} className="w-full border border-[#e5b17a] p-2 rounded-lg">
+                <select
+                  value={userdata.city || ""}
+                  onChange={(e) => setUserData({ ...userdata, city: e.target.value })}
+                  className="w-full border border-[#e5b17a] p-2 rounded-lg"
+                >
                   <option value="">-- Select City --</option>
                   {cities.map((city) => (
                     <option key={city} value={city}>{city}</option>
@@ -151,14 +169,25 @@ const ProfileEditModal = ({ isOpen, onClose, oldData, onSave }) => {
                 </select>
               </div>
 
+              {/* Upload photo */}
               <div>
                 <label className="block mb-1 text-[#7a1d1d] font-semibold">Upload Photo</label>
-                <input type="file" accept="image/*" onChange={(e) => setPhotoFile(e.target.files[0])} className="w-full border border-[#e5b17a] p-2 rounded-lg" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setPhotoFile(e.target.files[0])}
+                  className="w-full border border-[#e5b17a] p-2 rounded-lg"
+                />
               </div>
             </div>
 
             <div className="p-4 border-t border-[#b30059] flex justify-end bg-[#fff0f3] rounded-b-2xl">
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleSaveClick} className="px-6 py-2 bg-[#b30059] text-white font-bold rounded-full hover:bg-[#7a1d1d] transition-all">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleSaveClick}
+                className="px-6 py-2 bg-[#b30059] text-white font-bold rounded-full hover:bg-[#7a1d1d] transition-all"
+              >
                 Save & Close
               </motion.button>
             </div>

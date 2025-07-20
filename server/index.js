@@ -6,36 +6,32 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import connectDB from "./src/config/db.js";
 import authRouter from "./src/routes/authRouter.js";
-import userRouter from "./src/routes/userRoutes.js"; // ✅ User routes
+import userRouter from "./src/routes/userRoutes.js";
 
-import path from "path";
 import { fileURLToPath } from "url";
-import multer from "multer";
+import path from "path";
 
 dotenv.config();
 
-// Required to use __dirname with ES Modules
+// Enable __dirname with ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Connect to DB
+// Connect to MongoDB
 connectDB();
 
 const app = express();
 
-// Middleware
+// Middleware setup
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-app.use(express.json()); // To parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // To parse URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-// Static folder to serve uploaded temp images if needed
-app.use("/temp_uploads", express.static(path.join(__dirname, "temp_uploads")));
-
 // Routes
 app.use("/auth", authRouter);
-app.use("/user", userRouter); // ✅ Protected routes
+app.use("/user", userRouter);
 
 // Test route
 app.get("/", (req, res) => {

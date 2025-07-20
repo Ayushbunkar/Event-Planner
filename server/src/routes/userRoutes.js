@@ -6,8 +6,9 @@ import { Protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// ⬇️ Temp file upload config (files go to temp_uploads folder)
-const upload = multer({ dest: "temp_uploads/" });
+// ✅ Use multer memory storage (no local file saving)
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // ✅ GET user profile
 router.get("/profile", Protect, GetProfile);

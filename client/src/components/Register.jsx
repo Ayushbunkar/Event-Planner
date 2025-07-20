@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import api from "../config/api";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,9 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -20,28 +24,25 @@ const Register = () => {
     }));
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { name, email, phone, password, confirmPassword } = formData;
 
     if (!name || !email || !phone || !password || !confirmPassword) {
-      alert("Please fill all fields.");
+      toast.error("Please fill all fields");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      toast.error("Passwords do not match");
       return;
     }
 
     if (password.length < 6) {
-      alert("Password must be at least 6 characters.");
+      toast.error("Password must be at least 6 characters");
       return;
     }
 
-   
     try {
       const res = await api.post("/auth/register", {
         name,
@@ -50,19 +51,19 @@ const Register = () => {
         password,
       });
 
-      toast.success(res.data.message);
-      
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-      });
+      toast.success(res.data.message || "Registered successfully");
+      const { user, token } = res.data;
+      login(user, token);
+      navigate("/dashboard");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Something went wrong"
+      );
     }
   };
+
   return (
     <div className="w-full">
       <section
@@ -71,10 +72,10 @@ const Register = () => {
           backgroundImage: `url("https://imgs.search.brave.com/stwlmFcv46Z-2qAVu0V366Vm1HzvsAR-nPPvdJHdsTE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMjI5/ODQ1LmpwZw")`,
         }}
       >
-        <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]  z-0"></div>
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] z-0"></div>
 
         <div className="z-10 mt-30 text-center px-4 absolute top-10">
-          <h1 className="text-4xl md:text-5xl  font-bold mb-4 drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
             Create an Account
           </h1>
           <p className="text-base md:text-lg max-w-xl mx-auto mb-6 drop-shadow">

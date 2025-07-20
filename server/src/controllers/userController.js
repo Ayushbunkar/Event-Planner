@@ -2,13 +2,13 @@
 import User from "../models/userModels.js";
 import cloudinary from "cloudinary";
 
+// GET PROFILE
 export const GetProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
+
     if (!currentUser) {
-      const error = new Error("User Not Found !! Login Again");
-      error.statusCode = 401;
-      return next(error);
+      return res.status(401).json({ message: "User not found. Please login again." });
     }
 
     res.status(200).json({
@@ -20,13 +20,13 @@ export const GetProfile = async (req, res, next) => {
   }
 };
 
+// UPDATE PROFILE
 export const UpdateProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
+
     if (!currentUser) {
-      const error = new Error("User Not Found !! Login Again");
-      error.statusCode = 401;
-      return next(error);
+      return res.status(401).json({ message: "User not found. Please login again." });
     }
 
     const {
@@ -38,22 +38,23 @@ export const UpdateProfile = async (req, res, next) => {
       district,
       state,
       representing,
-      phone
+      phone,
     } = req.body;
 
-    const file = req.file;
     let photoUrl = currentUser.photo;
 
-    if (file) {
-      const b64 = Buffer.from(file.buffer).toString("base64");
-      const dataURI = `data:${file.mimetype};base64,${b64}`;
-      const result = await cloudinary.v2.uploader.upload(dataURI, {
+    if (req.file) {
+      const b64 = Buffer.from(req.file.buffer).toString("base64");
+      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+
+      const uploadResult = await cloudinary.v2.uploader.upload(dataURI, {
         folder: "eventPlannerPictures",
         width: 500,
         height: 500,
         crop: "fill",
       });
-      photoUrl = result.secure_url;
+
+      photoUrl = uploadResult.secure_url;
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -70,10 +71,13 @@ export const UpdateProfile = async (req, res, next) => {
         phone,
         photo: photoUrl,
       },
-      { new: true }
+      { new: true } // returns updated doc
     );
 
-    res.status(200).json({ message: "Profile Updated", data: updatedUser });
+    res.status(200).json({
+      message: "Profile Updated Successfully",
+      data: updatedUser,
+    });
   } catch (error) {
     next(error);
   }

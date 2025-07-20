@@ -8,31 +8,35 @@ import AccountDeactivateModal from "./AccountDeactivateModal";
 const Profile = () => {
   const [userdata, setUserData] = useState({});
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false); 
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
 
   const fetchUserData = async () => {
     try {
-      const res = await api.get("/user/profile");
+      const res = await api.get("/user/profile", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setUserData(res.data.data);
     } catch (error) {
       toast.error(
-        `Error: ${error.response?.status || error.message} | ${
-          error.response?.data.message || ""
-        }`
+        `Error ${error.response?.status || ""}: ${error.response?.data?.message || error.message}`
       );
     }
   };
 
   const handleSave = async (updatedData) => {
     try {
-      await api.put("/user/profile", updatedData);
+      await api.put("/user/profile", updatedData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       toast.success("Profile updated successfully");
       fetchUserData();
     } catch (error) {
       toast.error(
-        `Update failed: ${error.response?.status || error.message} | ${
-          error.response?.data.message || ""
-        }`
+        `Update failed: ${error.response?.status || ""} | ${error.response?.data?.message || error.message}`
       );
     }
   };
@@ -60,7 +64,11 @@ const Profile = () => {
             <div><span className="font-semibold text-[#a3542d]">Phone:</span> {userdata.phone}</div>
           </div>
           <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#c49b63] shadow-lg">
-            <img src={userdata.photo} alt="Profile" className="object-cover w-full h-full" />
+            <img
+              src={userdata.photo || "/default-avatar.png"}
+              alt="Profile"
+              className="object-cover w-full h-full"
+            />
           </div>
         </div>
 
@@ -69,13 +77,13 @@ const Profile = () => {
             Your Royal Details
           </h2>
           <div className="space-y-3 text-md">
-            <div><b className="text-[#a3542d]">Gender:</b> {userdata.gender}</div>
-            <div><b className="text-[#a3542d]">Occupation:</b> {userdata.occupation}</div>
-            <div><b className="text-[#a3542d]">Address:</b> {userdata.address}</div>
-            <div><b className="text-[#a3542d]">City:</b> {userdata.city}</div>
-            <div><b className="text-[#a3542d]">District:</b> {userdata.district}</div>
-            <div><b className="text-[#a3542d]">State:</b> {userdata.state}</div>
-            <div><b className="text-[#a3542d]">Representing:</b> {userdata.representing}</div>
+            <div><b className="text-[#a3542d]">Gender:</b> {userdata.gender || "N/A"}</div>
+            <div><b className="text-[#a3542d]">Occupation:</b> {userdata.occupation || "N/A"}</div>
+            <div><b className="text-[#a3542d]">Address:</b> {userdata.address || "N/A"}</div>
+            <div><b className="text-[#a3542d]">City:</b> {userdata.city || "N/A"}</div>
+            <div><b className="text-[#a3542d]">District:</b> {userdata.district || "N/A"}</div>
+            <div><b className="text-[#a3542d]">State:</b> {userdata.state || "N/A"}</div>
+            <div><b className="text-[#a3542d]">Representing:</b> {userdata.representing || "N/A"}</div>
           </div>
         </div>
 
@@ -98,14 +106,14 @@ const Profile = () => {
 
       <ProfileEditModal
         isOpen={isEditOpen}
-        onClose={() => setIsEditOpen(false)} 
+        onClose={() => setIsEditOpen(false)}
         oldData={userdata}
-        onSave={handleSave} 
+        onSave={handleSave}
       />
 
       <AccountDeactivateModal
         isOpen={isDeactivateModalOpen}
-        onClose={() => setIsDeactivateModalOpen(false)} 
+        onClose={() => setIsDeactivateModalOpen(false)}
       />
     </section>
   );

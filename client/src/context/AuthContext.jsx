@@ -1,39 +1,34 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
-import api from "../config/api"; 
+// AuthContext.jsx
+import React, { createContext, useContext, useEffect, useState } from "react";
+import api from "../config/api"; // Axios instance
 import { toast } from "react-hot-toast";
 
-
 const AuthContext = createContext();
-
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+      if (!token) return;
 
       const res = await api.get("/user/profile", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const userData = res.data.data;
       setUser(userData);
       setIsLogin(true);
       setIsAdmin(userData.role === "admin");
-    } catch (error) {
-      console.error("Failed to fetch user:", error);
-      toast.error("Session expired");
-      logout();
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      toast.error("Session expired or invalid profile data");
+      localStorage.removeItem("token");
+      setIsLogin(false);
     }
   };
 
@@ -55,17 +50,13 @@ export const AuthProvider = ({ children }) => {
     setIsAdmin(false);
   };
 
-  const value = {
-    user,
-    isLogin,
-    isAdmin,
-    loading,
-    login,
-    logout,
-    fetchProfile,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ user, isLogin, isAdmin, login, logout, fetchProfile }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);
