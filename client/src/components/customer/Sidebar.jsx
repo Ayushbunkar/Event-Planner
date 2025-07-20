@@ -11,7 +11,7 @@ import {
 const Sidebar = ({ active, setActive }) => {
   return (
     <div className="w-1/3 md:w-1/4 lg:w-1/3 min-h-[87vh] p-5 flex flex-col justify-between font-serif bg-[#fff7ef] border-r border-[#f5cbaa] shadow-xl rounded-tr-3xl rounded-br-3xl">
-      {/* Top Heading */}
+      
       <div>
         <div className="border-b-2 border-[#f5cbaa] pb-3 mb-6 text-center">
           <span className="text-2xl font-bold text-[#7a1d1d] tracking-wider">
@@ -19,7 +19,7 @@ const Sidebar = ({ active, setActive }) => {
           </span>
         </div>
 
-        {/* Menu Items */}
+        
         <ul className="space-y-4">
           <li
             className={`flex items-center gap-3 p-3 rounded-lg text-md font-medium cursor-pointer transition-all border ${
@@ -74,7 +74,7 @@ const Sidebar = ({ active, setActive }) => {
         </ul>
       </div>
 
-      {/* Logout Button */}
+      
       <div className="mt-8">
         <button className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-[#7a1d1d] text-[#7a1d1d] hover:bg-[#7a1d1d] hover:text-white rounded-xl font-semibold transition-all shadow-md">
           Logout <FaSignOutAlt />

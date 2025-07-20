@@ -71,7 +71,7 @@ const UserDashboardEdit = () => {
     <div className="bg-gray-100 min-h-screen p-8">
       <h2 className="text-2xl font-bold mb-4 text-center">Edit Your Profile</h2>
       <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        {/* Profile Photo Upload */}
+        
         <div className="flex flex-col items-center mb-4">
           <div className="relative">
             <img
@@ -95,7 +95,7 @@ const UserDashboardEdit = () => {
           </div>
         </div>
 
-        {/* Editable Fields */}
+        
         <div className="space-y-4">
           <div>
             <label className="block font-semibold mb-1">Name</label>
@@ -131,7 +131,7 @@ const UserDashboardEdit = () => {
           </div>
         </div>
 
-        {/* Save + Cancel Buttons */}
+        
         <div className="flex justify-end gap-4 mt-6">
           <button
             onClick={() => navigate("/customer-dashboard")}

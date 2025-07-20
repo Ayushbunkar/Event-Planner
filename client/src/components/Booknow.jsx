@@ -34,10 +34,7 @@ const Booknow = () => {
 
       toast.success(res.data.message || "Login successful!");
 
-      // ✅ Optional: Store token if your backend sends one
-      // localStorage.setItem("token", res.data.token);
-
-      // ✅ Redirect to Customer Dashboard
+      
       navigate("/dashboard");
 
       setFormData({ email: "", password: "" });
