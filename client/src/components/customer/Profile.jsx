@@ -3,10 +3,12 @@ import { CiEdit } from "react-icons/ci";
 import { toast } from "react-hot-toast";
 import ProfileEditModal from "./ProfileEditModal";
 import api from "../../config/api";
+import AccountDeactivateModal from "./AccountDeactivateModal";
 
 const Profile = () => {
   const [userdata, setUserData] = useState({});
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false); 
 
   const fetchUserData = async () => {
     try {
@@ -85,11 +87,25 @@ const Profile = () => {
         </button>
       </div>
 
+      <button
+        className="border border-[#8b1f1f] hover:scale-105 mt-5 mx-5 float-end text-[#8b1f1f] hover:text-white bg-transparent hover:bg-[#b84c4c] p-2 rounded-lg font-bold flex gap-2 justify-center items-center cursor-pointer text-lg transition-all duration-300"
+        onClick={() => {
+          setIsDeactivateModalOpen(true);
+        }}
+      >
+        Deactivate My Account
+      </button>
+
       <ProfileEditModal
         isOpen={isEditOpen}
-        onClose={() => setIsEditOpen(false)}
+        onClose={() => setIsEditOpen(false)} 
         oldData={userdata}
-        onSave={handleSave}
+        onSave={handleSave} 
+      />
+
+      <AccountDeactivateModal
+        isOpen={isDeactivateModalOpen}
+        onClose={() => setIsDeactivateModalOpen(false)} 
       />
     </section>
   );

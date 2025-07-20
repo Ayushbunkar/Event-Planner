@@ -1,0 +1,26 @@
+import React, { use } from "react";
+
+
+const AuthContext = React.createContext();
+export const AuthProvider = (props)=>{
+
+    const [user, setUser] = React.useState(null);
+    const [isLogin, setIsLogin] = React.useState(false);
+    const [isAdmin,setIsAdmin] = React.useState(false);
+
+    useEffect(() => {});
+
+    const value={
+        user,
+        isLogin,
+        isAdmin,
+        setUser,
+        setIsLogin,
+        setIsAdmin,
+    };
+    return (
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+  );
+
+
+};

@@ -20,7 +20,8 @@ import CustomerDashboard from "./pages/CustomerDashboard";
 const App = () => {
   return (
     <BrowserRouter>
-    <header> <Toaster position="top-center" reverseOrder={false} />
+    <header>
+       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
 </header>
       
@@ -39,7 +40,7 @@ const App = () => {
            <Route path="/dashboard" element={<CustomerDashboard />} />
 
           
-          {/* Optional 404 Page */}
+          
           <Route
             path="*"
             element={
