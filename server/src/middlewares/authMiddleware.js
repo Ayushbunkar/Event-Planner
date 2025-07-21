@@ -3,22 +3,28 @@ import User from "../models/userModels.js";
 
 export const Protect = async (req, res, next) => {
   try {
-    const token = req.cookies.token; // ✅ getting token from cookie
+    const token = req.cookies.IDCard || "";
+    console.log(token);
 
     if (!token) {
-      return res.status(401).json({ message: "Not authorized, token missing" });
+      const error = new Error("Unauthorized !! Login Again");
+      error.statusCode = 401;
+      return next(error);
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select("-password");
+    const decode = await jwt.verify(token, process.env.JWT_SECRET);
 
-    if (!user) {
-      return res.status(401).json({ message: "Not authorized, user not found" });
+    const verifiedUser = await User.findById(decode.ID).select("-password");
+
+    if (!verifiedUser) {
+      const error = new Error("Unauthorized !! Login Again");
+      error.statusCode = 401;
+      return next(error);
     }
 
-    req.user = user;
+    req.user = verifiedUser;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Not authorized, invalid token" });
+    next(error);
   }
 };
