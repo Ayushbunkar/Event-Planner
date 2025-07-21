@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import api from "../config/api";
+import { toast } from "react-hot-toast";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
-    feedback: ""
+    feedback: "",
   });
 
   const handleChange = (e) => {
@@ -14,16 +16,25 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.fullname) {
-      alert("Please enter both email and full name.");
+    if (!formData.fullname || !formData.email) {
+      toast.error("Please enter both email and full name.");
       return;
     }
 
-    alert("Thank you for contacting us! ❤️");
-    console.log("Submitted Data:", formData);
+    try {
+      const res = await api.post("/contactus/submit", formData);
+      toast.success(res.data.message || "Message sent successfully");
+      setFormData({ fullname: "", email: "", feedback: "" });
+    } catch (error) {
+      toast.error(
+        `Error ${error.response?.status || ""}: ${
+          error.response?.data?.message || error.message
+        }`
+      );
+    }
   };
 
   return (
@@ -34,11 +45,9 @@ const Contact = () => {
           "url('https://images.pexels.com/photos/1707446/pexels-photo-1707446.jpeg')",
       }}
     >
-    
       <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] bg-opacity-60 z-10"></div>
 
-     
-      <div className="z-20 relative  text-center px-4 flex flex-col justify-center items-center h-full text-white">
+      <div className="z-20 relative text-center px-4 flex flex-col justify-center items-center h-full text-white">
         <div className="flex mt-20 w-125 justify-center items-center min-h-screen p-6">
           <form
             onSubmit={handleSubmit}
@@ -56,7 +65,6 @@ const Contact = () => {
                 type="text"
                 id="fullname"
                 name="fullname"
-                required
                 value={formData.fullname}
                 onChange={handleChange}
                 className="w-full px-4 py-2 bg-white/10 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 placeholder-gray-300"
@@ -72,7 +80,6 @@ const Contact = () => {
                 type="email"
                 id="email"
                 name="email"
-                required
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-2 bg-white/10 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 placeholder-gray-300"
