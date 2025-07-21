@@ -1,19 +1,19 @@
-// routes/userRoutes.js
 import express from "express";
-import multer from "multer";
-import { GetProfile, UpdateProfile } from "../controllers/userController.js";
+import { GetProfile } from "../controllers/userController.js";
 import { Protect } from "../middlewares/authMiddleware.js";
+import multer from 'multer';
+import { UpdateUser, deleteUser} from "../controllers/authcontroller.js";
+
+const upload = multer();
 
 const router = express.Router();
 
-// ✅ Use multer memory storage (for cloudinary upload)
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-// ✅ GET /user/profile
 router.get("/profile", Protect, GetProfile);
 
-// ✅ PUT /user/profile
-router.put("/profile", Protect, upload.single("photo"), UpdateProfile);
+
+router.put("/update", Protect, upload.single("picture"), UpdateUser);
+
+router.put("/deactivate", Protect, deleteUser);
+
 
 export default router;
