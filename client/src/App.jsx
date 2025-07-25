@@ -14,6 +14,7 @@ import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
 import UserDashboardEdit from "./components/UserDashboardEdit";
 import CustomerDashboard from "./pages/CustomerDashboard";
+import AdminPanel from "./pages/AdminPanel";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -39,6 +40,9 @@ const App = () => {
             <Route path="/userDashboard" element={<UserDashboard />} />
             <Route path="/userDashboardEdit" element={<UserDashboardEdit />} />
             <Route path="/dashboard" element={<CustomerDashboard />} />
+            <Route path="/adminPanel" element={<AdminPanel />} />
+            
+            {/* Fallback route for 404 */}
 
             <Route
               path="*"
