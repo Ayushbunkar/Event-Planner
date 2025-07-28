@@ -1,7 +1,7 @@
 import user from "../models/userModels.js";
 import bcrypt from "bcrypt";
 import genToken from "../utils/auth.js";
-// dv
+// dvsdf
 export const RegisterUser = async (req, res, next) => {
   try {
     const { name, email, phone, password } = req.body;
