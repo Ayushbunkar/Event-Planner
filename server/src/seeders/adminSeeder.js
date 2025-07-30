@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import connectDB from "../config/db.js";
-import User from "../models/userModel.js";
+import User from "../models/userModels.js";
 import bcrypt from "bcrypt";
 
 const seedAdmin = async () => {
@@ -22,11 +22,14 @@ const seedAdmin = async () => {
     city: "N/A",
     district: "N/A",
     state: "N/A",
-    role: "Admin",
+    role: "admin",
     status: "Active",
   };
 
-  const existingAdmin = await User.findOne({ role: "Admin" });
+  // Remove all other admin users except the one with the correct email
+  await User.deleteMany({ role: "admin", email: { $ne: "admin@mywebsite.com" } });
+
+  const existingAdmin = await User.findOne({ email: "admin@mywebsite.com" });
 
   let admin;
   if (existingAdmin) {

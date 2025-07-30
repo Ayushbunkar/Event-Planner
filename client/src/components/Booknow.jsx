@@ -34,11 +34,15 @@ const Booknow = () => {
 
       toast.success(res.data.message || "Login successful!");
 
-      
+      // Save token to localStorage (optional)
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       navigate("/dashboard");
 
       setFormData({ email: "", password: "" });
     } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
       toast.error(
         error.response?.data?.message || "Login failed. Please try again."
       );

@@ -60,11 +60,12 @@ export const LoginUser = async (req, res, next) => {
       return next(error);
     }
 
-    genToken(existingUser._id, res);
+    const token = genToken(existingUser._id, res);
 
     res.status(200).json({
       message: `Welcome Back ${existingUser.name}`,
       data: existingUser,
+      token
     });
   } catch (error) {
     next(error);
