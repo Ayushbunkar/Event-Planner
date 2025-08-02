@@ -1,4 +1,4 @@
-import user from "../models/userModels.js";
+import user from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import genToken from "../utils/auth.js";
 // dvsdf

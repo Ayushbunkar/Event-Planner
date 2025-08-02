@@ -2,49 +2,42 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../config/api";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 const Booknow = () => {
   const navigate = useNavigate();
+ const {user,setUser,isLogin,setIsLogin,isAdmin,setIsAdmin} = useAuth();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const formSubmitKro = async (e) => {
     e.preventDefault();
 
-    const { email, password } = formData;
-
-    if (!email || !password) {
-      toast.error("Please enter both email and password.");
-      return;
-    }
-
     try {
-      const res = await api.post("/auth/login", { email, password });
-
+      const res = await api.post("/auth/booknow", { email, password });
       toast.success(res.data.message || "Login successful!");
 
-      // Save token to localStorage (optional)
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      // Save user data
+      setUser(res.data.data);
+      setIsLogin(true);
+      if (res.data.data.role === "Admin") {
+        setIsAdmin(true);
+        navigate("/adminpanel");
+      } else {
+        setIsAdmin(false);
+        navigate("/dashboard");
+      }
 
-      navigate("/dashboard");
-
-      setFormData({ email: "", password: "" });
+      // Reset fields
+      setEmail("");
+      setPassword("");
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
+      console.error("Login Error:", error);
       toast.error(
-        error.response?.data?.message || "Login failed. Please try again."
+        `Error: ${error.response?.status || error.message} | ${
+          error.response?.data.message || "Login failed"
+        }`
       );
     }
   };
@@ -72,16 +65,17 @@ const Booknow = () => {
           <h2 className="text-2xl font-bold mb-4 text-center">
             Login to Continue
           </h2>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4" onSubmit={formSubmitKro}>
             <div>
               <label className="block mb-1">Email</label>
               <input
                 name="email"
                 type="email"
-                onChange={handleChange}
-                value={formData.email}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 className="w-full px-4 py-2 drop-shadow-md rounded bg-white/10 border border-white/30 text-white focus:outline-none"
                 placeholder="you@google.com"
+                required
               />
             </div>
             <div>
@@ -89,10 +83,11 @@ const Booknow = () => {
               <input
                 name="password"
                 type="password"
-                onChange={handleChange}
-                value={formData.password}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 className="w-full px-4 py-2 rounded bg-white/10 border border-white/30 text-white focus:outline-none"
                 placeholder="••••••••"
+                required
               />
             </div>
             <button

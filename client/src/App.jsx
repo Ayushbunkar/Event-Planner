@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/userDashboard" element={<UserDashboard />} />
             <Route path="/userDashboardEdit" element={<UserDashboardEdit />} />
             <Route path="/dashboard" element={<CustomerDashboard />} />
-            <Route path="/adminPanel" element={<AdminPanel />} />
+            <Route path="/adminpanel" element={<AdminPanel />} />
             
             {/* Fallback route for 404 */}
 

@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import AdminRouter from "./src/routes/adminRoutes.js"
 
 import connectDB from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
@@ -35,6 +36,7 @@ app.use(morgan("dev"));
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/contactus", contactusRoutes);
+app.use("/admin",AdminRouter);
 
 // Default route
 app.get("/", (req, res) => {

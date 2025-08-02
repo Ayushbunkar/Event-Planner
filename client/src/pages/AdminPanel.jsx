@@ -17,7 +17,7 @@ const AdminPannel = () => {
 
   useEffect(() => {
     if (!isLogin) {
-      navigate("/login");
+      navigate("/booknow");
     }
   }, [isLogin, isAdmin, navigate]);
 
