@@ -17,6 +17,7 @@ const deactivationSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+// sdv
 
 const Deactivation = mongoose.model("Deactivation", deactivationSchema);
 export default Deactivation;
