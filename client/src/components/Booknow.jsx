@@ -61,6 +61,7 @@ const Booknow = () => {
           </p>
         </div>
 
+{/* sdvfda */}
         <div className="backdrop-blur-md bg-white/20 p-10 rounded-xl mt-30 w-full max-w-md text-white shadow-lg border border-white/30 z-10">
           <h2 className="text-2xl font-bold mb-4 text-center">
             Login to Continue
