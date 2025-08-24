@@ -10,6 +10,8 @@ export const SubmitContactForm = async (req, res, next) => {
       return next(error);
     }
 
+    // dgs
+
     const newContact = await Contact.create({ fullname, email, feedback });
 
     res.status(200).json({
