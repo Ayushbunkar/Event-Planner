@@ -20,7 +20,7 @@ const AdminPannel = () => {
     }
   }, [isLogin, isAdmin, navigate]);
 
-//kjnkn
+//kjnknffds
   return (
     <>
       <div className="flex">
