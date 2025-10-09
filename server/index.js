@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Server running ✅" });
 });
 
-// Global error handlerbv
+// Global error handlerbv hjhbcg
 app.use((err, req, res, next) => {
   console.error("❌ Error Handler:", err.message);
   res.status(err.statusCode || 500).json({
