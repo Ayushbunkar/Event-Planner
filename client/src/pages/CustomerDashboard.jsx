@@ -7,7 +7,7 @@ import Profile from "../components/customer/Profile";
 import Bookings from "../components/customer/Bookings";
 import Support from "../components/customer/Support";
 import Feedback from "../components/customer/Feedback";
-
+//b n
 import navbarBg from "../assets/dashboardbg.jpg";
 
 const CustomerDashboard = () => {
